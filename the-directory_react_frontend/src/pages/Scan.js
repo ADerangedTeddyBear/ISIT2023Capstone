@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../assets/styles/Styles.css';
 export default function Scan(){
-    const [testStuff, setTestStuff] = useState(0);
+    const [testStuff, setTestStuff] = useState([]);
 
     useEffect ( () => {
         fetch('http://localhost:1625/api/product')
@@ -11,7 +11,11 @@ export default function Scan(){
             }
             throw new Error ("Server not up or malfunctioning");
         })
-        .then((res) => {setTestStuff(res.data); console.log(res); console.log(testStuff)})
+        .then((res) => {
+            setTestStuff(res); 
+            console.log(res); 
+            console.log(testStuff)
+        })
         .catch((err) => console.log(err));
 
         }, [])
@@ -20,6 +24,7 @@ export default function Scan(){
         <div>
             <h1>Scan</h1>
             <h3>Data is below: </h3>
+            {JSON.stringify(testStuff)}
         </div>
     )
 }
