@@ -6,9 +6,12 @@
     
 }
 
-.nav_bar a{
+.link_item{
     margin: 80px 40px;
     text-align: center;
-    
+    color: white;
 }
 
+.link_item:hover {
+    background-color: darkgrey;
+}

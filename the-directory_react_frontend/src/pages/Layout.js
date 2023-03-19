@@ -7,9 +7,9 @@ const Layout = () => {
   return (
     <>
     <img src={logo} className="App-logo" alt="logo" />        
-        <Nav />
+    <Nav />
+    <Outlet />
 
-        <Outlet />
     </>
   )
 };

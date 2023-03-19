@@ -6,11 +6,11 @@ export default function Nav(){
     return (
         <div className='nav_bar'>
 
-            <Link to="/">Home</Link>
+            <Link className = 'link_item' to="/">Home</Link>
 
-            <Link to="/scan">Scan</Link>
+            <Link  className = 'link_item' to="/scan">Scan</Link>
 
-            <Link to="/scanner">Scanner</Link>
+            <Link  className = 'link_item' to="/scanner">Scanner</Link>
 
 
 
