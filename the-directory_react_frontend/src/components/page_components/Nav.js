@@ -10,6 +10,8 @@ export default function Nav(){
 
             <Link to="/scan">Scan</Link>
 
+            <Link to="/scanner">Scanner</Link>
+
 
 
         </div>
