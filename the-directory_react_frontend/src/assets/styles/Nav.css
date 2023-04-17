@@ -1,9 +1,8 @@
 .nav_bar{
     color: white;
     display: block;
-   
-    
-    
+    text-align: center;
+    font-size: x-large; 
 }
 
 .link_item{

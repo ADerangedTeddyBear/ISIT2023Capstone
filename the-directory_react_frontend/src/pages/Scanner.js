@@ -25,7 +25,7 @@ export default function Scanner(){
     };
     return (
         <div>
-            <h1>Scanner</h1>
+            <h1 className='pageTitle'>Scanner</h1>
 
             <MobileView>
                 <div className='scanner'>
