@@ -1,6 +1,7 @@
 import ReactPaginate from 'react-paginate';
 import { useEffect, useState } from 'react';
 import '../assets/styles/Styles.css';
+import ScanItem from '../components/page_components/ScanItem';
 
 export default function Scan(){
     const [testStuff, setTestStuff] = useState([]);
@@ -43,19 +44,20 @@ export default function Scan(){
         <div className="container">
         <div className="row m-2">
      
-
         {testStuff.map((item) => {
-        return <div key={item.product_id} className="col-sm-6 col-md-4 v my-2" >
-            <div className="card shadow-sm w-100" style={{ minHeight: 225 }}>
-            <div className="card-body">
-                <h5 className="card-title text-center h2">Product Name: {item.product_name}</h5>
-                <h5 className="card-title text-center h2">Price: {item.price}</h5>
-                <p className="card-text">Description: {item.discription}</p>
-                <h6 className="card-subtitle mb-2 text-muted text-center">Link: {item.link_Url}</h6>
-
+        return (
+            <div key={item.product_id}>
+                        <ScanItem itemName = {item.product_name} itemDescription ={item.discription} itemLink = {item.link_Url} />
+                {/* <div className="card shadow-sm w-100" style={{ minHeight: 225 }}>
+                    <div className="card-body">
+                        <h5 className="card-title text-center h2">Product Name: {item.product_name}</h5>
+                        <h5 className="card-title text-center h2">Price: {item.price}</h5>
+                        <p className="card-text">Description: {item.discription}</p>
+                        <h6 className="card-subtitle mb-2 text-muted text-center">Link: {item.link_Url}</h6>
+                    </div>
+                </div> */}
             </div>
-            </div>
-            </div>;
+            );
         })}
 
         <ReactPaginate 
