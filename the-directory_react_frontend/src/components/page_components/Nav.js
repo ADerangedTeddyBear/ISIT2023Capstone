@@ -17,7 +17,7 @@ export default function Nav(){
 
             {/* Mobile */}
             <MobileView>
-            <div className="w3-bar w3-border w3-xlarge">
+            <div className="w3-bar w3-border" style={{fontSize: '5vw'}}>
                 <Link className = 'link_item' to="/">Home</Link>
                 <Link  className = 'link_item' to="/scan">Scan</Link>
                 <Link  className = 'link_item' to="/scanner">Scanner</Link>

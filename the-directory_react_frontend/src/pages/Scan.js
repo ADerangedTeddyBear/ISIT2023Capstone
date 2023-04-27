@@ -47,15 +47,7 @@ export default function Scan(){
         {testStuff.map((item) => {
         return (
             <div key={item.product_id}>
-                        <ScanItem itemName = {item.product_name} itemDescription ={item.discription} itemLink = {item.link_Url} />
-                {/* <div className="card shadow-sm w-100" style={{ minHeight: 225 }}>
-                    <div className="card-body">
-                        <h5 className="card-title text-center h2">Product Name: {item.product_name}</h5>
-                        <h5 className="card-title text-center h2">Price: {item.price}</h5>
-                        <p className="card-text">Description: {item.discription}</p>
-                        <h6 className="card-subtitle mb-2 text-muted text-center">Link: {item.link_Url}</h6>
-                    </div>
-                </div> */}
+                <ScanItem itemName = {item.product_name} itemDescription ={item.discription} itemLink = {item.link_Url} />
             </div>
             );
         })}
