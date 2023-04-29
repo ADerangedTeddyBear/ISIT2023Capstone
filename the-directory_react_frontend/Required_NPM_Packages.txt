@@ -1,0 +1,5 @@
+npm - npm install --force
+React scanner - npm i react-scanner --force
+React Pagination - npm i react-js-pagination --force
+React Paginate - npm i react-paginate --force
+Run audit fix - npm audit fix --force
