@@ -1,6 +1,8 @@
 import ReactPaginate from 'react-paginate';
+import ScanItem from '../components/page_components/ScanItem';
 import { useEffect, useState } from 'react';
 import '../assets/styles/Styles.css';
+
 
 
 export default function Scan(){
@@ -19,7 +21,7 @@ export default function Scan(){
 
             setProducts(data.products);
             setPageLimit(data.pages);
-            console.log("The limit is " + data.pages);           
+            // console.log("The limit is " + data.pages);           
         }
 
         getProducts();
@@ -60,14 +62,11 @@ export default function Scan(){
 
                 {products.map((product) => {
                     return (
-                        <div key={product.id} className="col-sm-6 col-md-4 v my-2" >
-                            <div className="card shadow-sm w-100" style={{ minHeight: 225 }}>
-                                <div className="card-body">
-                                    <h5 className="card-title text-center h2">Product Name: {product.productName}</h5>
-                                    <h5 className="card-title text-center h2">Price: {product.imgSrc}</h5>
-                                    <p className="card-text">Description: {product.description}</p>
-                                </div>
-                            </div>
+                        <div key={product.id}>
+                            <ScanItem itemName = {product.productName} itemDescription ={product.description} itemLink = {product.imageName} />
+
+
+                          
                         </div>
                     );
                 })}
@@ -136,4 +135,12 @@ export default function Scan(){
         </div>
     )
 }
-*/
+
+
+ <div className="card shadow-sm w-100" style={{ minHeight: 225 }}>
+                                <div className="card-body">
+                                    <h5 className="card-title text-center h2">Product Name: {product.productName}</h5>
+                                    <h5 className="card-title text-center h2">Price: {product.imgSrc}</h5>
+                                    <p className="card-text">Description: {product.description}</p>
+                                </div>
+                            </div>*/
