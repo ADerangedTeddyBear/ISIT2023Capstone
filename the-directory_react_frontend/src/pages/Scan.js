@@ -5,6 +5,7 @@ import '../assets/styles/Styles.css';
 
 
 
+
 export default function Scan(){
 
     const [products, setProducts] = useState([]);
@@ -14,7 +15,7 @@ export default function Scan(){
         
         const getProducts = async () => {
             const res = await fetch(
-                'https://localhost:7294/api/Product/1'
+                'https://localhost:7294/api/Pages/1'
             );
 
             const data = await res.json();
@@ -26,16 +27,14 @@ export default function Scan(){
 
         getProducts();
 
-
     }, []);
 
 
     const fetchProducts = async (currentPage) => {
 
-        const requestURL = "https://localhost:7294/api/Product/" + currentPage;
+        const requestURL = "https://localhost:7294/api/Pages/" + currentPage;
         const res = await fetch(
             requestURL
-
         );
 
         const data = await res.json();
@@ -63,15 +62,10 @@ export default function Scan(){
                 {products.map((product) => {
                     return (
                         <div key={product.id}>
-                            <ScanItem itemName = {product.productName} itemDescription ={product.description} itemLink = {product.imageName} />
-
-
-                          
+                            <ScanItem itemName = {product.productName} itemDescription ={product.description} itemLink = {product.imageAccessNumber} />
                         </div>
                     );
                 })}
-
-                
 
             </div>             
         </div> 
