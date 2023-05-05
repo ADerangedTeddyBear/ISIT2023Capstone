@@ -18,7 +18,7 @@ export default function ScanItem(props){
                         </header>
 
                         <div className="w3-container">
-                            <p>{props.itemDescription}</p>
+                            <p style={{overflow: 'auto',   height: '50px'}}>{props.itemDescription}</p>
                         </div>
                         <br></br>
                         <div className="w3-container">
