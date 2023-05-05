@@ -20,8 +20,8 @@ const Layout = () => {
       <h1 className="Title-label">The Directory</h1>
       {/* <img src={logo} className="App-logo-alt" alt="logo" /> */}
       <br></br>
-      <Nav />
       <Outlet />
+      <Nav />
     </MobileView>
 
 

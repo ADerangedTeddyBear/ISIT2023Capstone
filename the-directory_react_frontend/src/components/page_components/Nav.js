@@ -1,6 +1,8 @@
 import React from 'react';
 import '../../assets/styles/Nav.css';
 import '../../assets/styles/W3.css';
+import qrImg from "../../assets/images/qr-code.png"
+import homeImg from "../../assets/images/home-del.png"
 
 import { Link } from 'react-router-dom';
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'; 
@@ -18,9 +20,9 @@ export default function Nav(){
             {/* Mobile */}
             <MobileView>
             <div className="w3-bar w3-border" style={{fontSize: '5vw'}}>
-                <Link className = 'link_item' to="/">Home</Link>
-                <Link  className = 'link_item' to="/scan">Scan</Link>
-                <Link  className = 'link_item' to="/scanner">Scanner</Link>
+                <Link className = 'link_item' to="/"><img src={homeImg}></img></Link>
+                <Link  className = 'link_item' to="/scan"><img src={qrImg}></img></Link>
+                <Link  className = 'link_item' to="/scanner"><img src={qrImg}></img></Link>
             </div>
 
                 {/* <div className="w3-sidebar w3-bar-block">
