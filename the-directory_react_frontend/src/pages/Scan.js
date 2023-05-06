@@ -4,15 +4,28 @@ import { useEffect, useState } from 'react';
 import '../assets/styles/Styles.css';
 
 
-
+// Iamge_import
+import {
+  ref,
+  getDownloadURL,
+  listAll,
+  getMetadata,
+  getStorage
+} from "firebase/storage";
+import { storage } from "../firebase";
 
 export default function Scan(){
+    // Image list
+    const [imageUrls, setImageUrls] = useState({});
+    const imagesListRef = ref(storage, "images/");
+
+    // Create a reference to the file whose metadata we want to retrieve
 
     const [products, setProducts] = useState([]);
     const [pageLimit, setPageLimit] = useState([]);
 
+
     useEffect(() => {
-        
         const getProducts = async () => {
             const res = await fetch(
                 'https://localhost:7294/api/Pages/1'
@@ -22,13 +35,33 @@ export default function Scan(){
 
             setProducts(data.products);
             setPageLimit(data.pages);
-            // console.log("The limit is " + data.pages);           
+              
+            data.products.forEach((item)=>{
+                console.log(item.imageAccessNumber)
+            })
+
         }
 
         getProducts();
+        
+
+
+        listAll(imagesListRef).then((response) => {
+            response.items.forEach((item) => {
+                getDownloadURL(item).then((url => {
+                    let updatedValue= {}
+                    updatedValue[item.name] = url
+                    //console.log(item.name, url)
+                    setImageUrls(imageUrls => ({
+                        ...imageUrls,
+                        url
+                    }))
+              }));
+            });
+          });
+        
 
     }, []);
-
 
     const fetchProducts = async (currentPage) => {
 
@@ -56,7 +89,9 @@ export default function Scan(){
         <div>
         <div className='container'>
             <div className='row m-2'>
-
+                {/* {console.log(Object.keys(Object.values(imageUrls)[0]) + "Key")}
+                {console.log(Object.values(Object.values(imageUrls)[0]))} */}
+                {console.log(imageUrls)}
                 {products.map((product) => {
                     return (
                         <div key={product.id}>
@@ -64,7 +99,6 @@ export default function Scan(){
                         </div>
                     );
                 })}
-
             </div>             
         </div> 
 

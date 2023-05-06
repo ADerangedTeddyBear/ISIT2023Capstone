@@ -4,34 +4,10 @@ import '../../assets/styles/W3.css';
 import { Link } from 'react-router-dom';
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'; 
 
-// Iamge_import
-import { useState, useEffect } from "react";
-import {
-  ref,
-  getDownloadURL,
-  listAll,
-} from "firebase/storage";
-import { storage } from "../../firebase";
-
 
     
 export default function ScanItem(props){
-    // Image list
-    const [imageUrls, setImageUrls] = useState([]);
-    const imagesListRef = ref(storage, "images/");
 
-    // One Image
-    const [imageUrl, setImageUrl] = useState('');
-
-    useEffect(() => {
-        listAll(imagesListRef).then((response) => {
-          response.items.forEach((item) => {
-            getDownloadURL(item).then((url) => {
-              setImageUrls((prev) => [...prev, url]);
-            });
-          });
-        });
-      }, []);
 
     return (
         <div>
@@ -49,10 +25,10 @@ export default function ScanItem(props){
                         <br></br>
                         <div className="w3-container">
                             imageAccessNumber: {props.itemLink}
-                            {console.log(imageUrls + "Test")}
+                            {/* {console.log(imageUrls + "Test")}
                             {imageUrls.map((url) => {
                                 return <img src={url} />;
-                            })}
+                            })} */}
 
                         </div>
                     </div>
