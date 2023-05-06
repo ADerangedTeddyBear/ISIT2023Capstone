@@ -16,13 +16,14 @@ import { storage } from "../firebase";
 
 export default function Scan(){
     // Image list
-    const [imageUrls, setImageUrls] = useState({});
+    const [imageUrls, setImageUrls] = useState([]);
     const imagesListRef = ref(storage, "images/");
 
     // Create a reference to the file whose metadata we want to retrieve
 
     const [products, setProducts] = useState([]);
     const [pageLimit, setPageLimit] = useState([]);
+    const [testObjects, settestObjects] = useState([]);
 
 
     useEffect(() => {
@@ -31,37 +32,47 @@ export default function Scan(){
                 'https://localhost:7294/api/Pages/1'
             );
 
-            const data = await res.json();
-
+            const data = await res.json();            
             setProducts(data.products);
             setPageLimit(data.pages);
-              
+
+            // console.log(data.pages.imageAccessNumber)
             data.products.forEach((item)=>{
                 console.log(item.imageAccessNumber)
             })
-
         }
-
-        getProducts();
         
-
+        getProducts();
 
         listAll(imagesListRef).then((response) => {
             response.items.forEach((item) => {
                 getDownloadURL(item).then((url => {
-                    let updatedValue= {}
-                    updatedValue[item.name] = url
-                    //console.log(item.name, url)
-                    setImageUrls(imageUrls => ({
-                        ...imageUrls,
-                        url
-                    }))
-              }));
+                    console.log(url)
+                    console.log("Name: " + item.name)
+                    setImageUrls((prev) => [...prev, url]);
+                }));
+                });
             });
-          });
-        
+        }, []);
 
-    }, []);
+        // ans = {
+        //     " rogue-kettlebells123.png" : "https://firebasestorage.googleapis.com/v0/b/capstoneimages-d2664.appspot.com/o/images%2Frogue-kettlebells123.png?alt=media&token=f4968254-7ac9-4af8-8312-e336c8090d35 rogue-kettlebells123.png",
+        //     " 02172023-141930-&ds_e.png" : "https://firebasestorage.googleapis.com/v0/b/capstoneimages-d2664.appspot.com/o/images%2Frogue-kettlebells123.png?alt=media&token=f4968254-7ac9-4af8-8312-e336c8090d35 rogue-kettlebells123.png"
+        // }
+
+
+        // how to make function
+        // how to pass data using the paramuiter
+        // const getTestObjects(produc, inamges) = products =>{
+        //     console.log(products)
+        //     settestObjects[
+        //         {productnma: 12121,
+        //         dis:"1212",
+        //         image : ""
+        //         limk :""
+        //         }
+        //     ]
+        // }
 
     const fetchProducts = async (currentPage) => {
 
@@ -85,13 +96,11 @@ export default function Scan(){
         setProducts(productsFormsServer);
     }
 
+
     return (
         <div>
         <div className='container'>
             <div className='row m-2'>
-                {/* {console.log(Object.keys(Object.values(imageUrls)[0]) + "Key")}
-                {console.log(Object.values(Object.values(imageUrls)[0]))} */}
-                {console.log(imageUrls)}
                 {products.map((product) => {
                     return (
                         <div key={product.id}>
