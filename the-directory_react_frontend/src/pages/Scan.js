@@ -54,8 +54,6 @@ export default function Scan(){
 
     return (
         <div>
-
-
         <div className='container'>
             <div className='row m-2'>
 

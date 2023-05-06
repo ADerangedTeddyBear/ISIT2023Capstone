@@ -1,7 +1,6 @@
 import React from 'react';
 import '../../assets/styles/Nav.css';
 import '../../assets/styles/W3.css';
-
 import { Link } from 'react-router-dom';
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'; 
 
@@ -44,18 +43,13 @@ export default function ScanItem(props){
                         <header className="w3-container w3-white">
                             <h1>{props.itemName}</h1>
                         </header>
-
                         <div className="w3-container">
                             <p>{props.itemDescription}</p>
                         </div>
                         <br></br>
                         <div className="w3-container">
                             imageAccessNumber: {props.itemLink}
-
-                            -----------------------------
-                            {imageUrls}
-                            ------------------------------
-                            
+                            {console.log(imageUrls + "Test")}
                             {imageUrls.map((url) => {
                                 return <img src={url} />;
                             })}
