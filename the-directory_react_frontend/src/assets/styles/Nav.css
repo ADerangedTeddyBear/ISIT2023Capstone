@@ -14,3 +14,8 @@
 .link_item:hover {
     background-color: darkgrey;
 }
+
+.navIcons{
+    width: 10%;
+    height: 10%;
+}

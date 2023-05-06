@@ -19,10 +19,10 @@ export default function Nav(){
 
             {/* Mobile */}
             <MobileView>
-            <div className="w3-bar w3-border" style={{fontSize: '5vw'}}>
-                <Link className = 'link_item' to="/"><img src={homeImg}></img></Link>
-                <Link  className = 'link_item' to="/scan"><img src={qrImg}></img></Link>
-                <Link  className = 'link_item' to="/scanner"><img src={qrImg}></img></Link>
+            <div className="w3-bar w3-border" style={{fontSize: '5vw', position: 'fixed', bottom:0}}>
+                <Link className = 'link_item' to="/"><img className = 'navIcons' src={homeImg}></img></Link>
+                <Link  className = 'link_item' to="/scan"><img className = 'navIcons' src={qrImg}></img></Link>
+                <Link  className = 'link_item' to="/scanner"><img className = 'navIcons' src={qrImg}></img></Link>
             </div>
 
                 {/* <div className="w3-sidebar w3-bar-block">
