@@ -123,7 +123,6 @@ export default function Scan(){
                 {/* {console.log(dictionary)} */}
                 {/* {console.log(typeof(Object.keys(dictionary)))} */}
                 {/* {console.log(Object.values(dictionary))} */}
-
                 {products.map((product) => {
                     {Object.entries(dictionary).map((dic) => {
                         if (dic[0] == product.id){
@@ -131,7 +130,6 @@ export default function Scan(){
                             //console.log(dic[0], product.id, dic[1])
                         }
                     })}
-
                     return (
                         <div key={product.id}>
                             <ScanItem itemName = {product.productName} itemDescription ={product.description} itemImageName = {product.imageAccessNumber}/>
