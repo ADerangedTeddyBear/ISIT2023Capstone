@@ -27,17 +27,35 @@ export default function Scan(){
 
     const [allProducts, setAllProducts] = useState([]);
     useEffect(() => {
-        // const getAllProducts = async () => {
-        //     const res = await fetch(
-        //         'https://localhost:7294/api/Product'
-        //     );
-        //     const data = await res.json();
-        //     setAllProducts(data.allProducts);
-        //     data.allProducts.forEach((item)=>{
-        //         console.log(item)
-        //     })
-        // }
-        // getAllProducts()
+        const getAllProducts = async () => {
+            const res = await fetch(
+                'https://localhost:7294/api/Product'
+            );
+            const data = await res.json();
+            setAllProducts(data.allProducts);
+            //console.log(data)
+
+            data.forEach((item)=>{
+                console.log(item)
+            })
+
+            listAll(imagesListRef).then((response) => {
+                response.items.forEach((item) => {
+                    getDownloadURL(item).then((url => {
+                            data.forEach((product)=>{
+                                if (product.imageAccessNumber == item.name){
+                                        setDictionary(prevDictionary => ({
+                                            ...prevDictionary,
+                                            [product.id]: url
+                                    }));
+                                }
+                            })
+
+                    }));
+                    });
+                });
+        }
+        getAllProducts()
 
 
         const getProducts = async () => {
@@ -53,22 +71,22 @@ export default function Scan(){
             //     console.log(item)
             // })
 
-            listAll(imagesListRef).then((response) => {
-                response.items.forEach((item) => {
-                    getDownloadURL(item).then((url => {
-                            data.products.forEach((product)=>{
-                                //console.log(product.imageAccessNumber, item.name)
-                                if (product.imageAccessNumber == item.name){
-                                        setDictionary(prevDictionary => ({
-                                            ...prevDictionary,
-                                            [product.id]: url
-                                    }));
-                                }
-                            })
+            // listAll(imagesListRef).then((response) => {
+            //     response.items.forEach((item) => {
+            //         getDownloadURL(item).then((url => {
+            //                 data.products.forEach((product)=>{
+            //                     //console.log(product.imageAccessNumber, item.name)
+            //                     if (product.imageAccessNumber == item.name){
+            //                             setDictionary(prevDictionary => ({
+            //                                 ...prevDictionary,
+            //                                 [product.id]: url
+            //                         }));
+            //                     }
+            //                 })
 
-                    }));
-                    });
-                });
+            //         }));
+            //         });
+            //     });
 
             setPageLimit(data.pages);
         }
