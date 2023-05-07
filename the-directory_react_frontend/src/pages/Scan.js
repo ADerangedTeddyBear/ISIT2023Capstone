@@ -14,7 +14,7 @@ export default function Scan(){
         
         const getProducts = async () => {
             const res = await fetch(
-                'https://localhost:7294/api/Product/1'
+                'https://localhost:7294/api/Pages/1'
             );
 
             const data = await res.json();
@@ -32,7 +32,7 @@ export default function Scan(){
 
     const fetchProducts = async (currentPage) => {
 
-        const requestURL = "https://localhost:7294/api/Product/" + currentPage;
+        const requestURL = "https://localhost:7294/api/Pages/" + currentPage;
         const res = await fetch(
             requestURL
 
