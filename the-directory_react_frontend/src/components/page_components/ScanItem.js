@@ -12,14 +12,14 @@ export default function ScanItem(props){
             
             {/* Browser */}
             <BrowserView>
-                <div className="w3-container w3-mobile" style={{marginTop: '15px', marginBotto: '15px'  }}>
-                    <div className="w3-card-4 w3-border">
+                <div className="DesktopScanItem">
+                    <div className="w3-card-4 w3-border DesktopScanItem">
                         <header className="w3-container w3-white">
-                            <h1>{props.itemName}</h1>
+                            <h1 className='DesktopItemName'>{props.itemName}</h1>
                         </header>
 
-                        <div className="w3-container">
-                            <p style={{overflow: 'auto',   height: '50px'}}>{props.itemDescription}</p>
+                        <div className="w3-container DesktopScanItemDescription">
+                            {props.itemDescription}
                         </div>
                         <br></br>
                         <div className="w3-container">
@@ -38,9 +38,9 @@ export default function ScanItem(props){
                             <h1 style={{fontSize: '6vw'}}>{props.itemName}</h1>
                         </header>
                         <div style={{fontSize: '3vw'}}>
-                        <div className="w3-container">
-                            <p style={{overflow: 'auto'}}>{props.itemDescription}</p>
-                        </div>
+                            <div className="w3-container">
+                                <p style={{overflow: 'auto', height: '150px'}}>{props.itemDescription}</p>
+                            </div>
                             <br></br>
                             <div className="w3-container">
                                 Link: {props.itemLink}

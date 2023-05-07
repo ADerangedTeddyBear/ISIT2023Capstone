@@ -1,4 +1,31 @@
 .MobileScanItem{ 
     width: 100%;
     height: 15%;
+    margin-top: '5px';
+    margin-bottom: '5px';
+}
+
+.MobileItemName {
+    font-size: '6vw';
+}
+
+.MobileScanItemDescription {
+    font-size: '3vw';
+}
+
+.DesktopScanItem {
+    margin-top: '5px';
+    margin-bottom: '5px';
+    width: 100%;
+    height: 30%;
+}
+
+.DesktopItemName {
+    font-size: 2vw;
+}
+
+.DesktopScanItemDescription {
+    overflow: auto;
+    height: 150px;
+    font-size: 1.5vw;
 }
