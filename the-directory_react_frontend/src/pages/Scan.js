@@ -23,56 +23,58 @@ export default function Scan(){
 
     const [products, setProducts] = useState([]);
     const [pageLimit, setPageLimit] = useState([]);
-    const [testObjects, settestObjects] = useState([]);
+    const [dictionary, setDictionary] = useState({});
 
-
+    const [allProducts, setAllProducts] = useState([]);
     useEffect(() => {
+        // const getAllProducts = async () => {
+        //     const res = await fetch(
+        //         'https://localhost:7294/api/Product'
+        //     );
+        //     const data = await res.json();
+        //     setAllProducts(data.allProducts);
+        //     data.allProducts.forEach((item)=>{
+        //         console.log(item)
+        //     })
+        // }
+        // getAllProducts()
+
+
         const getProducts = async () => {
             const res = await fetch(
                 'https://localhost:7294/api/Pages/1'
             );
 
-            const data = await res.json();            
+            const data = await res.json();
             setProducts(data.products);
-            setPageLimit(data.pages);
 
-            // console.log(data.pages.imageAccessNumber)
-            data.products.forEach((item)=>{
-                console.log(item.imageAccessNumber)
-            })
-        }
-        
-        getProducts();
+            // Check Mondo DB
+            // data.products.forEach((item)=>{
+            //     console.log(item)
+            // })
 
-        listAll(imagesListRef).then((response) => {
-            response.items.forEach((item) => {
-                getDownloadURL(item).then((url => {
-                    console.log(url)
-                    console.log("Name: " + item.name)
-                    setImageUrls((prev) => [...prev, url]);
-                }));
+            listAll(imagesListRef).then((response) => {
+                response.items.forEach((item) => {
+                    getDownloadURL(item).then((url => {
+                            data.products.forEach((product)=>{
+                                //console.log(product.imageAccessNumber, item.name)
+                                if (product.imageAccessNumber == item.name){
+                                        setDictionary(prevDictionary => ({
+                                            ...prevDictionary,
+                                            [product.id]: url
+                                    }));
+                                }
+                            })
+
+                    }));
+                    });
                 });
-            });
+
+            setPageLimit(data.pages);
+        }
+
+        getProducts();
         }, []);
-
-        // ans = {
-        //     " rogue-kettlebells123.png" : "https://firebasestorage.googleapis.com/v0/b/capstoneimages-d2664.appspot.com/o/images%2Frogue-kettlebells123.png?alt=media&token=f4968254-7ac9-4af8-8312-e336c8090d35 rogue-kettlebells123.png",
-        //     " 02172023-141930-&ds_e.png" : "https://firebasestorage.googleapis.com/v0/b/capstoneimages-d2664.appspot.com/o/images%2Frogue-kettlebells123.png?alt=media&token=f4968254-7ac9-4af8-8312-e336c8090d35 rogue-kettlebells123.png"
-        // }
-
-
-        // how to make function
-        // how to pass data using the paramuiter
-        // const getTestObjects(produc, inamges) = products =>{
-        //     console.log(products)
-        //     settestObjects[
-        //         {productnma: 12121,
-        //         dis:"1212",
-        //         image : ""
-        //         limk :""
-        //         }
-        //     ]
-        // }
 
     const fetchProducts = async (currentPage) => {
 
@@ -82,7 +84,6 @@ export default function Scan(){
         );
 
         const data = await res.json();
-        
         return (data.products);
     };
 
@@ -101,18 +102,29 @@ export default function Scan(){
         <div>
         <div className='container'>
             <div className='row m-2'>
+                {/* {console.log(dictionary)} */}
+                {/* {console.log(typeof(Object.keys(dictionary)))} */}
+                {/* {console.log(Object.values(dictionary))} */}
+
                 {products.map((product) => {
+                    {Object.entries(dictionary).map((dic) => {
+                        if (dic[0] == product.id){
+                            product.imageAccessNumber = dic[1]
+                            //console.log(dic[0], product.id, dic[1])
+                        }
+                    })}
+
                     return (
                         <div key={product.id}>
-                            <ScanItem itemName = {product.productName} itemDescription ={product.description} itemLink = {product.imageAccessNumber} />
+                            <ScanItem itemName = {product.productName} itemDescription ={product.description} itemImageName = {product.imageAccessNumber}/>
                         </div>
                     );
                 })}
-            </div>             
-        </div> 
+            </div>
+        </div>
 
         <div>
-            <ReactPaginate 
+            <ReactPaginate
                 previousLabel={'Previous'}
                 nextLabel={'Next'}
                 breakLabel={'...'}
@@ -131,7 +143,7 @@ export default function Scan(){
                 breakLinkClassName={'page-link'}
                 activeClassName={'active'}
             />
-        </div>      
+        </div>
 
 
         </div>
@@ -154,8 +166,8 @@ export default function Scan(){
             throw new Error ("Server not up or malfunctioning");
         })
         .then((res) => {
-            setTestStuff(res); 
-            console.log(res); 
+            setTestStuff(res);
+            console.log(res);
             console.log(testStuff)
         })
         .catch((err) => console.log(err));
