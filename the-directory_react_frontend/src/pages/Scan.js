@@ -2,6 +2,7 @@ import ReactPaginate from 'react-paginate';
 import ScanItem from '../components/page_components/ScanItem';
 import { useEffect, useState } from 'react';
 import '../assets/styles/Styles.css';
+import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'; 
 
 
 
@@ -56,7 +57,7 @@ export default function Scan(){
     return (
         <div>
 
-
+        <BrowserView>
         <div className='container'>
             <div className='row m-2'>
 
@@ -97,6 +98,51 @@ export default function Scan(){
                 activeClassName={'active'}
             />
         </div>      
+        </BrowserView>
+        <MobileView>
+            {/* ReactPaginate Pending Removal */}
+        <div>
+            <ReactPaginate 
+                previousLabel={'Previous'}
+                nextLabel={'Next'}
+                breakLabel={'...'}
+                pageCount={pageLimit}
+                marginPagesDisplayed={3}
+                pageRangeDisplayed={3}
+                onPageChange={handlePageClick}
+                containerClassName={'pagination justify-content-center'}
+                pageClassName={'page-item'}
+                pageLinkClassName={'page-link'}
+                previousClassName={'page-item'}
+                previousLinkClassName={'page-link'}
+                 nextClassName={'page-item'}
+                nextLinkClassName={'page-link'}
+                breakClassName={'page-item'}
+                breakLinkClassName={'page-link'}
+                activeClassName={'active'}
+            />
+        </div>    
+        <div className='container'>
+            <div className='row m-2'>
+
+                {products.map((product) => {
+                    return (
+                        <div key={product.id}>
+                            <ScanItem itemName = {product.productName} itemDescription ={product.description} itemLink = {product.imageName} />
+
+
+                          
+                        </div>
+                    );
+                })}
+
+                
+
+            </div>             
+        </div>   
+        </MobileView>
+
+
 
 
         </div>
