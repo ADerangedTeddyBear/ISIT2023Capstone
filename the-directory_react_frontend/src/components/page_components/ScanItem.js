@@ -6,10 +6,33 @@ import '../../assets/styles/ScanItem.css';
 import { Link } from 'react-router-dom';
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'; 
 
+import { useState, useEffect } from "react";
+import {
+  ref,
+  getDownloadURL,
+  listAll,
+} from "firebase/storage";
+import { storage } from "../../firebase";
+
+    
 export default function ScanItem(props){
+    const [imageUrls, setImageUrls] = useState([]);
+    const imagesListRef = ref(storage, "images/");
+
+
+    const [imageUrl, setImageUrl] = useState('');
+    useEffect(() => {
+        listAll(imagesListRef).then((response) => {
+          response.items.forEach((item) => {
+            getDownloadURL(item).then((url) => {
+              setImageUrls((prev) => [...prev, url]);
+            });
+          });
+        });
+      }, []);
+
     return (
         <div>
-            
             {/* Browser */}
             <BrowserView>
                 <div className="DesktopScanItem">
@@ -23,7 +46,7 @@ export default function ScanItem(props){
                         </div>
                         <br></br>
                         <div className="w3-container">
-                            Link: {props.itemLink}
+                            imageName: {props.itemImageName}
                         </div>
                     </div>
                 </div>
@@ -43,7 +66,11 @@ export default function ScanItem(props){
                             </div>
                             <br></br>
                             <div className="w3-container">
-                                Link: {props.itemLink}
+                                <img
+                                src= {props.itemImageName}
+                                />
+                                
+                                {/* ImageName: {props.itemImageName} */}
                             </div>
                         </div>
                     </div>

@@ -5,42 +5,104 @@ import '../assets/styles/Styles.css';
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'; 
 
 
+// Iamge_import
+import {
+  ref,
+  getDownloadURL,
+  listAll,
+  getMetadata,
+  getStorage
+} from "firebase/storage";
+import { storage } from "../firebase";
 
 export default function Scan(){
+    // Image list
+    const [imageUrls, setImageUrls] = useState([]);
+    const imagesListRef = ref(storage, "images/");
+
+    // Create a reference to the file whose metadata we want to retrieve
 
     const [products, setProducts] = useState([]);
     const [pageLimit, setPageLimit] = useState([]);
+    const [dictionary, setDictionary] = useState({});
 
+    const [allProducts, setAllProducts] = useState([]);
     useEffect(() => {
-        
+        const getAllProducts = async () => {
+            const res = await fetch(
+                'https://localhost:7294/api/Product'
+            );
+            const data = await res.json();
+            setAllProducts(data.allProducts);
+            //console.log(data)
+
+            data.forEach((item)=>{
+                console.log(item)
+            })
+
+            listAll(imagesListRef).then((response) => {
+                response.items.forEach((item) => {
+                    getDownloadURL(item).then((url => {
+                            data.forEach((product)=>{
+                                if (product.imageAccessNumber == item.name){
+                                        setDictionary(prevDictionary => ({
+                                            ...prevDictionary,
+                                            [product.id]: url
+                                    }));
+                                }
+                            })
+
+                    }));
+                    });
+                });
+        }
+        getAllProducts()
+
+
         const getProducts = async () => {
             const res = await fetch(
                 'https://localhost:7294/api/Pages/1'
             );
 
             const data = await res.json();
-
             setProducts(data.products);
+
+            // Check Mondo DB
+            // data.products.forEach((item)=>{
+            //     console.log(item)
+            // })
+
+            // listAll(imagesListRef).then((response) => {
+            //     response.items.forEach((item) => {
+            //         getDownloadURL(item).then((url => {
+            //                 data.products.forEach((product)=>{
+            //                     //console.log(product.imageAccessNumber, item.name)
+            //                     if (product.imageAccessNumber == item.name){
+            //                             setDictionary(prevDictionary => ({
+            //                                 ...prevDictionary,
+            //                                 [product.id]: url
+            //                         }));
+            //                     }
+            //                 })
+
+            //         }));
+            //         });
+            //     });
+
             setPageLimit(data.pages);
-            // console.log("The limit is " + data.pages);           
         }
 
         getProducts();
-
-
-    }, []);
-
+        }, []);
 
     const fetchProducts = async (currentPage) => {
 
         const requestURL = "https://localhost:7294/api/Pages/" + currentPage;
         const res = await fetch(
             requestURL
-
         );
 
         const data = await res.json();
-        
         return (data.products);
     };
 
@@ -54,31 +116,34 @@ export default function Scan(){
         setProducts(productsFormsServer);
     }
 
+
     return (
         <div>
 
         <BrowserView>
         <div className='container'>
             <div className='row m-2'>
-
+                {/* {console.log(dictionary)} */}
+                {/* {console.log(typeof(Object.keys(dictionary)))} */}
+                {/* {console.log(Object.values(dictionary))} */}
                 {products.map((product) => {
+                    {Object.entries(dictionary).map((dic) => {
+                        if (dic[0] == product.id){
+                            product.imageAccessNumber = dic[1]
+                            //console.log(dic[0], product.id, dic[1])
+                        }
+                    })}
                     return (
                         <div key={product.id}>
-                            <ScanItem itemName = {product.productName} itemDescription ={product.description} itemLink = {product.imageName} />
-
-
-                          
+                            <ScanItem itemName = {product.productName} itemDescription ={product.description} itemImageName = {product.imageAccessNumber}/>
                         </div>
                     );
                 })}
-
-                
-
-            </div>             
-        </div> 
+            </div>
+        </div>
 
         <div>
-            <ReactPaginate 
+            <ReactPaginate
                 previousLabel={'Previous'}
                 nextLabel={'Next'}
                 breakLabel={'...'}
@@ -165,8 +230,8 @@ export default function Scan(){
             throw new Error ("Server not up or malfunctioning");
         })
         .then((res) => {
-            setTestStuff(res); 
-            console.log(res); 
+            setTestStuff(res);
+            console.log(res);
             console.log(testStuff)
         })
         .catch((err) => console.log(err));
