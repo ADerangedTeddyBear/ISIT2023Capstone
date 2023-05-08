@@ -55,7 +55,7 @@ export default function ScanItem(props){
 
             {/* Mobile */}
             <MobileView>
-                <div className="w3-container MobileScanItem" style={{marginTop: '5px', marginBottom: '5px', width: '100vw', height: '30hw'}}>
+                <div className="w3-container MobileScanItem" style={{marginTop: '5px', marginBottom: '5px'}}>
                     <div className="w3-card-4 w3-border MobileScanItem">
                         <header className="w3-container w3-white">
                             <h1 style={{fontSize: '6vw'}}>{props.itemName}</h1>
