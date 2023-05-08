@@ -193,7 +193,7 @@ export default function Scan(){
                 {products.map((product) => {
                     return (
                         <div key={product.id}>
-                            <ScanItem itemName = {product.productName} itemDescription ={product.description} itemLink = {product.imageName} />
+                            <ScanItem itemName = {product.productName} itemDescription ={product.description} itemImageName = {product.imageAccessNumber}/>
 
 
                           
