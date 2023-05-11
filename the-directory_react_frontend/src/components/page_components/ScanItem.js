@@ -64,10 +64,12 @@ export default function ScanItem(props){
                             <div className="w3-container">
                                 <p style={{overflow: 'auto', height: '150px'}}>{props.itemDescription}</p>
                             </div>
-                            <br></br>
+                            {/* <br></br> */}
                             <div className="w3-container">
                                 <img
+                                className='itemImage'
                                 src= {props.itemImageName}
+                                
                                 />
                                 
                                 {/* ImageName: {props.itemImageName} */}
