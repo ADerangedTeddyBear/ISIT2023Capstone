@@ -13,27 +13,14 @@ import {
   listAll,
 } from "firebase/storage";
 import { storage } from "../../firebase";
-
+import { useSearchParams } from 'react-router-dom';
     
 export default function ScanItem(props){
-    const [imageUrls, setImageUrls] = useState([]);
-    const imagesListRef = ref(storage, "images/");
-
-
-    const [imageUrl, setImageUrl] = useState('');
-    useEffect(() => {
-        listAll(imagesListRef).then((response) => {
-          response.items.forEach((item) => {
-            getDownloadURL(item).then((url) => {
-              setImageUrls((prev) => [...prev, url]);
-            });
-          });
-        });
-      }, []);
+     const [searchParams, setSearchParams] = useSearchParams();
+     const [query, setQuery] = useState(searchParams.get('query'));
 
     return (
         <div>
-            {/* Browser */}
             <BrowserView>
                 <div className="DesktopScanItem">
                     <div className="w3-card-4 w3-border DesktopScanItem">
@@ -55,6 +42,9 @@ export default function ScanItem(props){
 
             {/* Mobile */}
             <MobileView>
+                            {(setSearchParams({ filter: `active ${props.itemName}`}))}
+                            {console.log(searchParams)}
+
                 <div className="w3-container MobileScanItem" style={{marginTop: '5px', marginBottom: '5px'}}>
                     <div className="w3-card-4 w3-border MobileScanItem">
                         <header className="w3-container w3-white">

@@ -24,17 +24,24 @@ import {
 } from "firebase/storage";
 import { storage } from "../firebase";
 
+//URL Search Parameter
+import { useSearchParams } from 'react-router-dom';
+
 export default function Scan(){
+    // URL Search Parameter
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [query, setQuery] = useState(searchParams.get('query'));
+
+
+
     // Image list
     const [imageUrls, setImageUrls] = useState([]);
     const imagesListRef = ref(storage, "images/");
 
     // Create a reference to the file whose metadata we want to retrieve
-
     const [products, setProducts] = useState([]);
     const [pageLimit, setPageLimit] = useState([]);
     const [dictionary, setDictionary] = useState({});
-
     const [allProducts, setAllProducts] = useState([]);
 
     
@@ -49,10 +56,6 @@ export default function Scan(){
             const data = await res.json();
             setAllProducts(data.allProducts);
             //console.log(data)
-
-            data.forEach((item)=>{
-                console.log(item)
-            })
 
             listAll(imagesListRef).then((response) => {
                 response.items.forEach((item) => {
@@ -82,31 +85,6 @@ export default function Scan(){
 
             //Swiper Payload
             setProductPerPAge(JSON.parse(JSON.stringify(data)));
-
-        
-
-            // Check Mondo DB
-            // data.products.forEach((item)=>{
-            //     console.log(item)
-            // })
-
-            // listAll(imagesListRef).then((response) => {
-            //     response.items.forEach((item) => {
-            //         getDownloadURL(item).then((url => {
-            //                 data.products.forEach((product)=>{
-            //                     //console.log(product.imageAccessNumber, item.name)
-            //                     if (product.imageAccessNumber == item.name){
-            //                             setDictionary(prevDictionary => ({
-            //                                 ...prevDictionary,
-            //                                 [product.id]: url
-            //                         }));
-            //                     }
-            //                 })
-
-            //         }));
-            //         });
-            //     });
-
             setPageLimit(data.pages);
         }
 
@@ -168,7 +146,7 @@ export default function Scan(){
         SlideRef.current.swiper.slidePrev();
     }
 
-    const onSlideChange = swiper => {
+    const onSlideChange = (swiper) => {
         handleSlideByState({
             isFirst: swiper.isBeginning,
             isLast: swiper.isEnd,
@@ -196,15 +174,10 @@ export default function Scan(){
         <div>
 
             {/* Swiper Test BEGIN */}
-
             <div className='swiper-paginate-controls'></div>
             <div className="bs-icons">
                 <BsArrowLeft id='arrowLeft' onClick= {()=> {isFirst ? handlePageClickPrev(): handlePrev()}}/>
                 <BsArrowRight id='arrowRight'  onClick= {()=> {isLast ? handlePageClickNext(): handleNext()}}/>            
-
-
-                {/* <BsArrowLeft id='arrowLeft' className={`Arrow ${isFirst ? 'disabled': ''}`} onClick={handlePrev}/>
-                <BsArrowRight id='arrowRight' className={`Arrow ${isLast ? 'disabled': ''}`} onClick={handleNext}/> */}
             </div>
                    
             <div>
@@ -221,174 +194,36 @@ export default function Scan(){
                 navigation={false}
                 modules={[Pagination, Navigation]}
                 >
-                        {products.map((product) => {
-                            {Object.entries(dictionary).map((dic) => {
-                                if (dic[0] == product.id){
-                                    product.imageAccessNumber = dic[1]
-                                    //console.log(dic[0], product.id, dic[1])
-                                }
-                            })}
-
-                            return (
-                                <SwiperSlide>              
-                        
-                                    <div className='row m-2'>
-                                        <div key={product.id}>
-                                            <ScanItem itemName = {product.productName} itemDescription ={product.description} itemImageName = {product.imageAccessNumber}/>
-                                        </div>                                
-                                    </div>                       
-
-                                </SwiperSlide>
-                                
-                            );
+                    {products.map((product) => {
+                        {Object.entries(dictionary).map((dic) => {
+                            if (dic[0] == product.id){
+                                product.imageAccessNumber = dic[1]
+                            }
                         })}
+                    })}
+
+
+                    {products.map((product) => {
+                    return (
+                        <SwiperSlide>
+                            <div className='row m-2'>
+                                <div key={product.id}>
+                                    <ScanItem
+                                    itemName = {product.productName} 
+                                    itemDescription ={product.description} 
+                                    itemImageName = {product.imageAccessNumber}
+                                    />
+
+                                </div>                                
+                            </div>                       
+                        </SwiperSlide>
+                    );
+                    })}
                     
-                
+
                 </Swiper>
             </div>
-
                  {/* Swiper Test END */}    
-            
                  </div>
     )
 }
-
-    //PREVIOUS RETURN CODE
-    // return (
-    //     <div>
-
-    //     <BrowserView>
-    //     <div className='container'>
-    //         <div className='row m-2'>
-    //             {/* {console.log(dictionary)} */}
-    //             {/* {console.log(typeof(Object.keys(dictionary)))} */}
-    //             {/* {console.log(Object.values(dictionary))} */}
-    //             {products.map((product) => {
-    //                 {Object.entries(dictionary).map((dic) => {
-    //                     if (dic[0] == product.id){
-    //                         product.imageAccessNumber = dic[1]
-    //                         //console.log(dic[0], product.id, dic[1])
-    //                     }
-    //                 })}
-    //                 return (
-    //                     <div key={product.id}>
-    //                         <ScanItem itemName = {product.productName} itemDescription ={product.description} itemImageName = {product.imageAccessNumber}/>
-    //                     </div>
-    //                 );
-    //             })}
-    //         </div>
-    //     </div>
-
-    //     <div>
-    //         <ReactPaginate
-    //             previousLabel={'Previous'}
-    //             nextLabel={'Next'}
-    //             breakLabel={'...'}
-    //             pageCount={pageLimit}
-    //             marginPagesDisplayed={3}
-    //             pageRangeDisplayed={3}
-    //             onPageChange={handlePageClick}
-    //             containerClassName={'pagination justify-content-center'}
-    //             pageClassName={'page-item'}
-    //             pageLinkClassName={'page-link'}
-    //             previousClassName={'page-item'}
-    //             previousLinkClassName={'page-link'}
-    //              nextClassName={'page-item'}
-    //             nextLinkClassName={'page-link'}
-    //             breakClassName={'page-item'}
-    //             breakLinkClassName={'page-link'}
-    //             activeClassName={'active'}
-    //         />
-    //     </div>      
-    //     </BrowserView>
-    //     <MobileView>
-    //         {/* ReactPaginate Pending Removal */}
-    //     <div>
-    //         <ReactPaginate 
-    //             previousLabel={'Previous'}
-    //             nextLabel={'Next'}
-    //             breakLabel={'...'}
-    //             pageCount={pageLimit}
-    //             marginPagesDisplayed={3}
-    //             pageRangeDisplayed={3}
-    //             onPageChange={handlePageClick}
-    //             containerClassName={'pagination justify-content-center'}
-    //             pageClassName={'page-item'}
-    //             pageLinkClassName={'page-link'}
-    //             previousClassName={'page-item'}
-    //             previousLinkClassName={'page-link'}
-    //              nextClassName={'page-item'}
-    //             nextLinkClassName={'page-link'}
-    //             breakClassName={'page-item'}
-    //             breakLinkClassName={'page-link'}
-    //             activeClassName={'active'}
-    //         />
-    //     </div>    
-    //     <div className='container'>
-    //         <div className='row m-2'>
-
-    //             {products.map((product) => {
-    //                 return (
-    //                     <div key={product.id}>
-    //                         <ScanItem itemName = {product.productName} itemDescription ={product.description} itemImageName = {product.imageAccessNumber}/>
-
-
-                          
-    //                     </div>
-    //                 );
-    //             })}
-
-                
-
-    //         </div>             
-    //     </div>   
-    //     </MobileView>
-
-
-
-
-    //     </div>
-    // )
-
-
-/*PREVIOUS CODE
-import React, { useState, useEffect } from 'react';
-import '../assets/styles/Styles.css';
-
-export default function Scan(){
-    const [testStuff, setTestStuff] = useState([]);
-
-    useEffect ( () => {
-        fetch('http://localhost:1625/api/product')
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-            throw new Error ("Server not up or malfunctioning");
-        })
-        .then((res) => {
-            setTestStuff(res);
-            console.log(res);
-            console.log(testStuff)
-        })
-        .catch((err) => console.log(err));
-
-        }, [])
-
-    return (
-        <div>
-            <h1>Scan</h1>
-            <h3>Data is below: </h3>
-            {JSON.stringify(testStuff)}
-        </div>
-    )
-}
-
-
- <div className="card shadow-sm w-100" style={{ minHeight: 225 }}>
-                                <div className="card-body">
-                                    <h5 className="card-title text-center h2">Product Name: {product.productName}</h5>
-                                    <h5 className="card-title text-center h2">Price: {product.imgSrc}</h5>
-                                    <p className="card-text">Description: {product.description}</p>
-                                </div>
-                            </div>*/
