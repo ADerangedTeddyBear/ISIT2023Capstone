@@ -5,6 +5,11 @@
     min-height: 35%;
     /* max-height: 300px; */
     margin-bottom: 5px;
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* width: 50%; */
 }
 
 .MobileScanItem{ 
