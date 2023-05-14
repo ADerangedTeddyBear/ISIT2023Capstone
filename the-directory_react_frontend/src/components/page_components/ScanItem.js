@@ -3,9 +3,7 @@ import '../../assets/styles/Nav.css';
 import '../../assets/styles/W3.css';
 import '../../assets/styles/ScanItem.css';
 
-import { Link } from 'react-router-dom';
-import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'; 
-
+import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 import { useState, useEffect } from "react";
 import {
   ref,
@@ -13,21 +11,19 @@ import {
   listAll,
 } from "firebase/storage";
 import { storage } from "../../firebase";
-import { useSearchParams } from 'react-router-dom';
-    
-export default function ScanItem(props){
-     const [searchParams, setSearchParams] = useSearchParams();
-     const [query, setQuery] = useState(searchParams.get('query'));
+import { Link ,useParams } from 'react-router-dom';
 
+export default function ScanItem(props){
+    const {productId} = useParams();
     return (
         <div>
+            {console.log(productId)}
             <BrowserView>
                 <div className="DesktopScanItem">
                     <div className="w3-card-4 w3-border DesktopScanItem">
                         <header className="w3-container w3-white">
                             <h1 className='DesktopItemName'>{props.itemName}</h1>
                         </header>
-
                         <div className="w3-container DesktopScanItemDescription">
                             {props.itemDescription}
                         </div>
@@ -42,9 +38,6 @@ export default function ScanItem(props){
 
             {/* Mobile */}
             <MobileView>
-                            {(setSearchParams({ filter: `active ${props.itemName}`}))}
-                            {console.log(searchParams)}
-
                 <div className="w3-container MobileScanItem" style={{marginTop: '5px', marginBottom: '5px'}}>
                     <div className="w3-card-4 w3-border MobileScanItem">
                         <header className="w3-container w3-white">
@@ -59,10 +52,7 @@ export default function ScanItem(props){
                                 <img
                                 className='itemImage'
                                 src= {props.itemImageName}
-                                
                                 />
-                                
-                                {/* ImageName: {props.itemImageName} */}
                             </div>
                         </div>
                     </div>

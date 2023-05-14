@@ -9,6 +9,8 @@ import Layout from "./pages/Layout";
 import Home from './pages/Home';
 import Scan from './pages/Scan';
 import Scanner from './pages/Scanner';
+import ScanItem from "./components/page_components/ScanItem";
+import OneItem from "./components/page_components/OneItem";
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="scan" element={<Scan />} />
+          <Route path="scan/:productId" element={<OneItem />} />
           <Route path="scanner" element={<Scanner />} />
         </Route>
       </Routes>

@@ -25,12 +25,15 @@ import {
 import { storage } from "../firebase";
 
 //URL Search Parameter
-import { useSearchParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 
 export default function Scan(){
+    const [clickable, setClickable] = useState(true);
+
     // URL Search Parameter
     const [searchParams, setSearchParams] = useSearchParams();
     const [query, setQuery] = useState(searchParams.get('query'));
+    const [isActive, setIsActive] = useState(true); 
 
 
 
@@ -47,7 +50,8 @@ export default function Scan(){
     
     //Swiper payload
     const [productPerPage, setProductPerPAge] = useState([]);
-    
+    const {productId} = useParams();
+
     useEffect(() => {
         const getAllProducts = async () => {
             const res = await fetch(
@@ -173,7 +177,7 @@ export default function Scan(){
     return (
         <div>
 
-            {/* Swiper Test BEGIN */}
+            {/* {console.log(products)} */}
             <div className='swiper-paginate-controls'></div>
             <div className="bs-icons">
                 <BsArrowLeft id='arrowLeft' onClick= {()=> {isFirst ? handlePageClickPrev(): handlePrev()}}/>
@@ -208,12 +212,12 @@ export default function Scan(){
                         <SwiperSlide>
                             <div className='row m-2'>
                                 <div key={product.id}>
+                                    <Link style={{pointerEvents: clickable ? '' : 'none'}} to={`/scan/${product.id}`}></Link>
                                     <ScanItem
                                     itemName = {product.productName} 
                                     itemDescription ={product.description} 
                                     itemImageName = {product.imageAccessNumber}
                                     />
-
                                 </div>                                
                             </div>                       
                         </SwiperSlide>
