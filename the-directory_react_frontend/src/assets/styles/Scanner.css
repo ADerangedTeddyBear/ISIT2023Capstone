@@ -7,3 +7,11 @@
 .pageTitle {
     text-align: center;
 }
+
+.PageTitleMobile {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    background-color: black;
+    margin-top: 0px;
+}
