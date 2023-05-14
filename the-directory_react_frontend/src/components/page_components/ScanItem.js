@@ -2,6 +2,7 @@ import React from 'react';
 import '../../assets/styles/Nav.css';
 import '../../assets/styles/W3.css';
 import '../../assets/styles/ScanItem.css';
+import testImage from '../../assets/images/testPicture.jpg'
 
 import { Link } from 'react-router-dom';
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'; 
@@ -61,14 +62,15 @@ export default function ScanItem(props){
                             <h1 style={{fontSize: '6vw'}}>{props.itemName}</h1>
                         </header>
                         <div style={{fontSize: '3vw'}}>
-                            <div className="w3-container">
-                                <p style={{overflow: 'auto', height: '150px'}}>{props.itemDescription}</p>
+                            <div className="MobileScanItemDescription">
+                               {props.itemDescription}
                             </div>
                             {/* <br></br> */}
                             <div className="w3-container">
                                 <img
                                 className='itemImage'
-                                src= {props.itemImageName}
+                                src = {testImage}
+                                // src= {props.itemImageName}
                                 
                                 />
                                 

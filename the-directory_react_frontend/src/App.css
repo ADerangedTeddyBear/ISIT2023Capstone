@@ -43,6 +43,13 @@ body{
   font-size: 10vw;
 }
 
+.PageTitleMobile {
+  position: sticky;
+  top: 0px;
+  width: 100%;
+  background-color: black;
+  margin-top: 0px;
+}
 /*
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
