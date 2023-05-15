@@ -64,7 +64,7 @@ export default function OneItem(props){
         getProducts();
         }, []);
 
-        const filteredData = Array.isArray(data) ? data.filter(item => item.id === productId) : console.log("sd");
+        const filteredData = Array.isArray(data) ? data.filter(item => item.id === productId) : console.log("NA");
 
     return (
         <div>

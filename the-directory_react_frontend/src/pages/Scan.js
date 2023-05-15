@@ -176,6 +176,7 @@ export default function Scan(){
     //UPDATED RETURN CODE
     return (
         <div>
+            {console.log(allProducts, products)}
 
             {/* {console.log(products)} */}
             <div className='swiper-paginate-controls'></div>
