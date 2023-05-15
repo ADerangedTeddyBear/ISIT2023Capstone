@@ -125,14 +125,33 @@ export default function Scan(){
     };
     
     const handlePageClickNext = async (data) =>{
-        // console.log("The Data page limit is: " + pageLimit); PASSED!!!
+        //console.log("The Data page limit is: " + pageLimit); //PASSED!!!
         //console.log("The Data page limit is: " + products[0].id); PASSED!!!
         //console.log("I AM THE LAST!!!"); //PASSED!!!
-        //console.log("The Data page is: " + productPerPage.currentPage); //PASSED!!!
+        //console.log("BEFORE: The Data page is: " + productPerPage.currentPage); //PASSED!!!
+        //console.log("The current slide is: " + SlideRef.current.swiper.activeIndex)
+        //console.log("The current slide is: " + SlideRef.current.swiper.slideReset())
 
-        let currentPage = productPerPage.currentPage + 1;
-        const productsFormsServer = await fetchProducts(currentPage);
-        setProducts(productsFormsServer);
+
+        productPerPage.currentPage = productPerPage.currentPage + 1;
+        console.log("The current page is: " + productPerPage.currentPage)
+        let currentPage = productPerPage.currentPage;
+
+        if (currentPage < productPerPage.pages + 1)
+        {
+            const productsFormsServer = await fetchProducts(currentPage);
+            setProducts(productsFormsServer);
+            SlideRef.current.swiper.slideTo(0,0,false)
+            //onSlideChange();
+
+            console.log("AFTER: The Data page is: " + currentPage); //PASSED!!!            
+        }
+        else
+        {
+            //Put end logic here
+
+        }
+               
     }
 
     const handlePageClickPrev = async (data) =>{
@@ -143,9 +162,13 @@ export default function Scan(){
 
         if (productPerPage.currentPage != 1)
         {
-            let currentPage = productPerPage.currentPage - 1;
-            const productsFormsServer = await fetchProducts(currentPage);
+            productPerPage.currentPage = productPerPage.currentPage - 1;
+            const productsFormsServer = await fetchProducts(productPerPage.currentPage);
+            
             setProducts(productsFormsServer);
+            SlideRef.current.swiper.slideTo(2,0,false)
+
+            console.log("AFTER: The Data page is: " + productPerPage.currentPage); //PASSED!!!  
 
         }
     
@@ -197,7 +220,7 @@ export default function Scan(){
 
             {/* Swiper Test BEGIN */}
 
-            <div className='swiper-paginate-controls'></div>
+            {/* <div className='swiper-paginate-controls'></div> */}
             <div className="bs-icons">
                 <BsArrowLeft id='arrowLeft' onClick= {()=> {isFirst ? handlePageClickPrev(): handlePrev()}}/>
                 <BsArrowRight id='arrowRight'  onClick= {()=> {isLast ? handlePageClickNext(): handleNext()}}/>            
