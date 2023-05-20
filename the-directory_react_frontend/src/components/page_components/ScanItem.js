@@ -20,8 +20,16 @@ import { storage } from "../../firebase";
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import axios from "axios";
 
+//Swiper Component imports
+//import Slider from '../components/page_components/Slider';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Navigation, Pagination } from 'swiper';
+import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
+import { useRef } from 'react';
 
-export default function ScanItem(props){
+export default function ScanItem(){
     //Flip tracker
     const [isFlipped, setIsFlipped] = useState(false);
     const handleClick = () => {
@@ -35,6 +43,12 @@ export default function ScanItem(props){
     const imagesListRef = ref(storage, "images/");
     const [products, setProducts] = useState([]);
     const [data, setData] = useState([]);
+
+
+    //Swiper payload
+    const [productPerPage, setProductPerPAge] = useState([]);
+    const [pageLimit, setPageLimit] = useState([]);
+
 
     useEffect(() => {
         axios.get('https://localhost:7294/api/Product')
@@ -71,30 +85,110 @@ export default function ScanItem(props){
 
             const data = await res.json();
             setProducts(data.products);
+
+            //Swiper Payload
+            setProductPerPAge(JSON.parse(JSON.stringify(data)));
+            setPageLimit(data.pages);
         }
-
-
-        getAllProducts()
         getProducts();
+        getAllProducts()
         }, []);
         const filteredData = Array.isArray(data) ? data.filter(item => item.id === productId) : console.log("NA");
 
+
+
+    const fetchProducts = async (currentPage) => {
+
+        const requestURL = "https://localhost:7294/api/Pages/" + currentPage;
+        const res = await fetch(
+            requestURL
+        );
+
+        const data = await res.json();
+        return (data.products);
+    };
+    
+    const handlePageClickNext = async (data) =>{
+        productPerPage.currentPage = productPerPage.currentPage + 1;
+        console.log("The current page is: " + productPerPage.currentPage)
+        let currentPage = productPerPage.currentPage;
+
+        if (currentPage < productPerPage.pages + 1)
+        {
+            const productsFormsServer = await fetchProducts(currentPage);
+            setProducts(productsFormsServer);
+            SlideRef.current.swiper.slideTo(0,0,false)
+            //onSlideChange();
+
+            console.log("AFTER: The Data page is: " + currentPage); //PASSED!!!            
+        }
+        else
+        {
+        }
+               
+    }
+
+    const handlePageClickPrev = async (data) =>{
+        if (productPerPage.currentPage != 1)
+        {        
+            productPerPage.currentPage = productPerPage.currentPage - 1;
+            const productsFormsServer = await fetchProducts(productPerPage.currentPage);
+            
+            setProducts(productsFormsServer);
+            SlideRef.current.swiper.slideTo(2,0,false)
+
+            console.log("AFTER: MADE it back. Data page is: " + productPerPage.currentPage); //PASSED!!!  
+        }
+
+    }
+
+
+     //Swiper Functions
+    const [slideBegOrNot, handleSlideByState] = useState({
+        isFirst: true,
+        isLast: false,
+    })
+    const SlideRef = useRef();
+
+    const handleNext = () => {        
+        SlideRef.current.swiper.slideNext();
+
+    }
+
+    const handlePrev = () => {
+        
+        SlideRef.current.swiper.slidePrev();
+    }
+
+    const onSlideChange = swiper => {
+        handleSlideByState({
+            isFirst: swiper.isBeginning,
+            isLast: swiper.isEnd,
+        });
+    };
+    const { isLast, isFirst } = slideBegOrNot;
+
+        
     return (
         <div>
             {/* Browser */}
+
+
+
+
             <BrowserView>
                 <div className="DesktopScanItem">
                     <div className="w3-card-4 w3-border DesktopScanItem">
                         <header className="w3-container w3-white">
-                            <h1 className='DesktopItemName'>{props.itemName}</h1>
+                            <h1 className='DesktopItemName'>props.itemName</h1>
                         </header>
 
                         <div className="w3-container DesktopScanItemDescription">
-                            {props.itemDescription}
+                            props.itemDescription
                         </div>
                         <br></br>
                         <div className="w3-container">
-                            imageName: {props.itemImageName}
+                            imageName: props.itemImageName
                         </div>
                     </div>
                 </div>
@@ -103,6 +197,7 @@ export default function ScanItem(props){
 
             {/* Mobile */}
             <MobileView>
+                
             {filteredData.map((product) => {
                         {Object.entries(dictionary).map((dic) => {
                             if (dic[0] == product.id){
@@ -113,6 +208,26 @@ export default function ScanItem(props){
 
 
             {filteredData.map(item => (
+                <div>
+                    <div className="bs-icons">
+                        <BsArrowLeft id='arrowLeft' onClick= {()=> {isFirst ? handlePageClickPrev(): handlePrev()}}/>
+                        <BsArrowRight id='arrowRight'  onClick= {()=> {isLast ? handlePageClickNext(): handleNext()}}/>            
+                    </div>
+                <div>
+                <Swiper
+                slidesPerView={1}
+                spaceBetween={0}
+                className={'mySwiper'}
+                ref={SlideRef}
+                onSlideChange={onSlideChange}
+                pagination={{
+                    el: '.swiper-paginate-controls',
+                    type: 'fraction',
+                }}
+                navigation={false}
+                modules={[Pagination, Navigation]}
+                >
+
                 <div className={`card ${isFlipped ? 'flipped' : ''}`} onClick={handleClick}>
                 <div className="card-inner">
                     <div className="card-front">
@@ -130,7 +245,6 @@ export default function ScanItem(props){
                                 
                             </div>
                         </div>                       
-                    
                 </div>
 
                 <div className="card-back">
@@ -140,6 +254,9 @@ export default function ScanItem(props){
                         {/* <h3 className="w3-container w3-white">{props.description}</h3> */}
                         <p>This is the back of the card.</p>
                 </div>
+                </div>
+                </div>
+                </Swiper>
                 </div>
                 </div>
             ))}
