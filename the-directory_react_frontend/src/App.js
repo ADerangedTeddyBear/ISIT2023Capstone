@@ -9,6 +9,7 @@ import Layout from "./pages/Layout";
 import Home from './pages/Home';
 import Scan from './pages/Scan';
 import Scanner from './pages/Scanner';
+import ScanItem from "./components/page_components/ScanItem";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="scan" element={<Scan />} />
+          <Route path="scan/:productId" element={<ScanItem />} />
           <Route path="scanner" element={<Scanner />} />
         </Route>
       </Routes>
@@ -27,30 +29,3 @@ function App() {
 }
 
 export default App;
-
-
-//<img src={logo} className="App-logo" alt="logo" />
-
-//<Nav />
-
-
-/*Boiler plate code
-   <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-
-      */
-
-
-      
