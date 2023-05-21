@@ -197,24 +197,65 @@ export default function ScanItem(){
 
             {/* Mobile */}
             <MobileView>
-                
-            {filteredData.map((product) => {
-                        {Object.entries(dictionary).map((dic) => {
-                            if (dic[0] == product.id){
-                                product.imageAccessNumber = dic[1]
-                            }
-                        })}
-                    })}
-
-
-            {filteredData.map(item => (
-                <div>
+                    
                     <div className="bs-icons">
                         <BsArrowLeft id='arrowLeft' onClick= {()=> {isFirst ? handlePageClickPrev(): handlePrev()}}/>
                         <BsArrowRight id='arrowRight'  onClick= {()=> {isLast ? handlePageClickNext(): handleNext()}}/>            
                     </div>
-                <div>
-                <Swiper
+
+                    <div>
+                        <Swiper
+                            slidesPerView={1}
+                            spaceBetween={0}
+                            className={'mySwiper'}
+                            ref={SlideRef}
+                            onSlideChange={onSlideChange}
+                            pagination={{
+                                el: '.swiper-paginate-controls',
+                                type: 'fraction',
+                            }}
+                            navigation={false}
+                            modules={[Pagination, Navigation]}
+                        >
+                            {products.map((product) => {
+                                {Object.entries(dictionary).map((dic) => {
+                                    if (dic[0] == product.id){
+                                        product.imageAccessNumber = dic[1]
+                                    }
+                                })}
+
+                                return (
+
+                                    <SwiperSlide>
+                                        <div className='row m-2'>
+                                            <div key={product.id}>
+                                            
+                                                itemName = {product.productName} itemDescription ={product.description} 
+                                                <img src={product.imageAccessNumber}/>
+                                            </div> 
+
+                                        </div> 
+                                    </SwiperSlide>
+                                );
+
+                                
+
+                             })}
+
+
+                        </Swiper>
+
+                    </div>
+
+            </MobileView>
+           
+        </div>
+    )
+}
+
+
+// PREVIOUS SWIPER CODE
+                {/* <Swiper
                 slidesPerView={1}
                 spaceBetween={0}
                 className={'mySwiper'}
@@ -226,14 +267,25 @@ export default function ScanItem(){
                 }}
                 navigation={false}
                 modules={[Pagination, Navigation]}
-                >
+                > */}
 
-                <div className={`card ${isFlipped ? 'flipped' : ''}`} onClick={handleClick}>
+                {/* {products.map((product) => {
+                        {Object.entries(dictionary).map((dic) => {
+                            if (dic[0] == product.id){
+                                product.imageAccessNumber = dic[1]
+                            }
+                        })}
+                    })} */}
+                  
+
+                    {/* return ( */}
+{/* 
+                        <div className={`card ${isFlipped ? 'flipped' : ''}`} onClick={handleClick}>
                 <div className="card-inner">
                     <div className="card-front">
 
                     <header className="w3-container w3-white">
-                        <h1 style={{fontSize: '6vw'}}>{item.productName}</h1>
+                        <h1 style={{fontSize: '6vw'}}>{product.productName}</h1>
                     </header>
                         <div style={{fontSize: '3vw'}}>
                             <br></br>
@@ -245,26 +297,49 @@ export default function ScanItem(){
                                 
                             </div>
                         </div>                       
-                </div>
-
+                </div> */}
+{/* 
                 <div className="card-back">
                     <header className="w3-container w3-white">
-                        <h1 style={{fontSize: '6vw'}}>{item.description}</h1>
-                    </header>
+                        <h1 style={{fontSize: '6vw'}}>{product.description}</h1>
+                    </header> */}
                         {/* <h3 className="w3-container w3-white">{props.description}</h3> */}
-                        <p>This is the back of the card.</p>
+                        {/* <p>This is the back of the card.</p>
                 </div>
                 </div>
-                </div>
-                </Swiper>
-                </div>
-                </div>
-            ))}
+                </div> */}
 
 
 
-</MobileView>
-           
-        </div>
-    )
-}
+                    {/* ) */}
+                
+
+                    
+
+                
+                {/* </Swiper> */}
+
+                  {/* <div>
+
+                </div> */}
+
+
+
+
+            {/* {filteredData.map((product) => {
+                        {Object.entries(dictionary).map((dic) => {
+                            if (dic[0] == product.id){
+                                product.imageAccessNumber = dic[1]
+                            }
+                        })}
+                    })} */}
+
+
+            {/* {filteredData.map(item => (
+                <div>
+                    
+                <div>
+               
+                </div>
+                </div>
+            ))} */}

@@ -108,77 +108,100 @@ export default function Scan(){
         return (data.products);
     };
     
-    const handlePageClickNext = async (data) =>{
-        productPerPage.currentPage = productPerPage.currentPage + 1;
-        console.log("The current page is: " + productPerPage.currentPage)
-        let currentPage = productPerPage.currentPage;
+    // const handlePageClickNext = async (data) =>{
+    //     productPerPage.currentPage = productPerPage.currentPage + 1;
+    //     console.log("The current page is: " + productPerPage.currentPage)
+    //     let currentPage = productPerPage.currentPage;
 
-        if (currentPage < productPerPage.pages + 1)
-        {
-            const productsFormsServer = await fetchProducts(currentPage);
-            setProducts(productsFormsServer);
-            SlideRef.current.swiper.slideTo(0,0,false)
-            //onSlideChange();
+    //     if (currentPage < productPerPage.pages + 1)
+    //     {
+    //         const productsFormsServer = await fetchProducts(currentPage);
+    //         setProducts(productsFormsServer);
+    //         SlideRef.current.swiper.slideTo(0,0,false)
+    //         //onSlideChange();
 
-            console.log("AFTER: The Data page is: " + currentPage); //PASSED!!!            
-        }
-        else
-        {
-            //Put end logic here
+    //         console.log("AFTER: The Data page is: " + currentPage); //PASSED!!!            
+    //     }
+    //     else
+    //     {
+    //         //Put end logic here
 
-        }
+    //     }
                
-    }
+    // }
 
-    const handlePageClickPrev = async (data) =>{
-        if (productPerPage.currentPage != 1)
-        {        
-            productPerPage.currentPage = productPerPage.currentPage - 1;
-            const productsFormsServer = await fetchProducts(productPerPage.currentPage);
+    // const handlePageClickPrev = async (data) =>{
+    //     if (productPerPage.currentPage != 1)
+    //     {        
+    //         productPerPage.currentPage = productPerPage.currentPage - 1;
+    //         const productsFormsServer = await fetchProducts(productPerPage.currentPage);
             
-            setProducts(productsFormsServer);
-            SlideRef.current.swiper.slideTo(2,0,false)
+    //         setProducts(productsFormsServer);
+    //         SlideRef.current.swiper.slideTo(2,0,false)
 
-            console.log("AFTER: MADE it back. Data page is: " + productPerPage.currentPage); //PASSED!!!  
-        }
+    //         console.log("AFTER: MADE it back. Data page is: " + productPerPage.currentPage); //PASSED!!!  
+    //     }
 
-    }
+    // }
 
 
      //Swiper Functions
-    const [slideBegOrNot, handleSlideByState] = useState({
-        isFirst: true,
-        isLast: false,
-    })
-    const SlideRef = useRef();
+    // const [slideBegOrNot, handleSlideByState] = useState({
+    //     isFirst: true,
+    //     isLast: false,
+    // })
+    // const SlideRef = useRef();
 
-    const handleNext = () => {        
-        SlideRef.current.swiper.slideNext();
+    // const handleNext = () => {        
+    //     SlideRef.current.swiper.slideNext();
 
-    }
+    // }
 
-    const handlePrev = () => {
+    // const handlePrev = () => {
         
-        SlideRef.current.swiper.slidePrev();
-    }
+    //     SlideRef.current.swiper.slidePrev();
+    // }
 
-    const onSlideChange = swiper => {
-        handleSlideByState({
-            isFirst: swiper.isBeginning,
-            isLast: swiper.isEnd,
-        });
-    };
-    const { isLast, isFirst } = slideBegOrNot;
+    // const onSlideChange = swiper => {
+    //     handleSlideByState({
+    //         isFirst: swiper.isBeginning,
+    //         isLast: swiper.isEnd,
+    //     });
+    // };
+    // const { isLast, isFirst } = slideBegOrNot;
 
     //UPDATED RETURN CODE
     return (
         <div>
-            <div className="bs-icons">
+            <ScanItem></ScanItem>
+            {/* {products.map((product) => {
+                            {Object.entries(dictionary).map((dic) => {
+                                if (dic[0] == product.id){
+                                    product.imageAccessNumber = dic[1]
+                                }
+                            })}
+                            return (
+                                <SwiperSlide>   
+                                    <div className='row m-2'>
+                                        <div key={product.id}>
+                                            <Link style={{pointerEvents: clickable ? '' : 'none'}} to={`/scan/${product.id}`}></Link>
+                                        </div>                                
+                                    </div>                       
+                                </SwiperSlide>
+                            );
+                        })}         */}
+
+        </div>
+    )
+}
+
+// PREVIOUS CODE FOR return
+{/* <div className="bs-icons">
                 <BsArrowLeft id='arrowLeft' onClick= {()=> {isFirst ? handlePageClickPrev(): handlePrev()}}/>
                 <BsArrowRight id='arrowRight'  onClick= {()=> {isLast ? handlePageClickNext(): handleNext()}}/>            
-            </div>
+            </div> */}
                    
-            <div>
+            {/* <div>
                 <Swiper
                 slidesPerView={1}
                 spaceBetween={0}
@@ -191,8 +214,8 @@ export default function Scan(){
                 }}
                 navigation={false}
                 modules={[Pagination, Navigation]}
-                >
-                        {products.map((product) => {
+                > */}
+                        {/* {products.map((product) => {
                             {Object.entries(dictionary).map((dic) => {
                                 if (dic[0] == product.id){
                                     product.imageAccessNumber = dic[1]
@@ -202,14 +225,11 @@ export default function Scan(){
                                 <SwiperSlide>   
                                     <div className='row m-2'>
                                         <div key={product.id}>
-                                            <Link style={{pointerEvents: clickable ? '' : 'none'}} to={`/scan/${product.id}`}><ScanItem/></Link>
+                                            <Link style={{pointerEvents: clickable ? '' : 'none'}} to={`/scan/${product.id}`}></Link>
                                         </div>                                
                                     </div>                       
                                 </SwiperSlide>
                             );
-                        })}
-                </Swiper>
-            </div>            
-                 </div>
-    )
-}
+                        })} */}
+                {/* </Swiper>
+            </div>             */}
