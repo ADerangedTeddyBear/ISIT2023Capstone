@@ -6,7 +6,7 @@ import testImage from '../../assets/images/testPicture.jpg'
 
 //New temp card css import
 import '../../assets/styles/Card.css';
-import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'; 
+import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 
 import { useState, useEffect } from "react";
 import {
@@ -15,7 +15,7 @@ import {
   listAll,
 } from "firebase/storage";
 import { storage } from "../../firebase";
-    
+
 // URL Params
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import axios from "axios";
@@ -106,7 +106,7 @@ export default function ScanItem(){
         const data = await res.json();
         return (data.products);
     };
-    
+
     const handlePageClickNext = async (data) =>{
         productPerPage.currentPage = productPerPage.currentPage + 1;
         console.log("The current page is: " + productPerPage.currentPage)
@@ -124,6 +124,7 @@ export default function ScanItem(){
         else
         {
         }
+               
     }
 
     const handlePageClickPrev = async (data) =>{
@@ -131,10 +132,13 @@ export default function ScanItem(){
         {        
             productPerPage.currentPage = productPerPage.currentPage - 1;
             const productsFormsServer = await fetchProducts(productPerPage.currentPage);
+            
             setProducts(productsFormsServer);
             SlideRef.current.swiper.slideTo(2,0,false)
+
             console.log("AFTER: MADE it back. Data page is: " + productPerPage.currentPage); //PASSED!!!  
         }
+
     }
 
 
@@ -163,7 +167,7 @@ export default function ScanItem(){
     };
     const { isLast, isFirst } = slideBegOrNot;
 
-        
+
     return (
         <div>
             {/* Browser */}
@@ -188,72 +192,57 @@ export default function ScanItem(){
 
             {/* Mobile */}
             <MobileView>
-                
-            {filteredData.map((product) => {
+                    
+                    <div className="bs-icons">
+                        <BsArrowLeft id='arrowLeft' onClick= {()=> {isFirst ? handlePageClickPrev(): handlePrev()}}/>
+                        <BsArrowRight id='arrowRight'  onClick= {()=> {isLast ? handlePageClickNext(): handleNext()}}/>            
+                    </div>
+
+                    <div>
+                        <Swiper
+                            slidesPerView={1}
+                            spaceBetween={0}
+                            className={'mySwiper'}
+                            ref={SlideRef}
+                            onSlideChange={onSlideChange}
+                            pagination={{
+                                el: '.swiper-paginate-controls',
+                                type: 'fraction',
+                            }}
+                            navigation={false}
+                            modules={[Pagination, Navigation]}
+                        >
+                    {products.map((product) => {
                         {Object.entries(dictionary).map((dic) => {
                             if (dic[0] == product.id){
                                 product.imageAccessNumber = dic[1]
                             }
                         })}
-                    })}
+                    console.log(typeof(filteredData), typeof(filteredData))
+
+                                return (
+                                    <SwiperSlide>
+                                        <div className='row m-2'>
+                                            <div key={product.id}>
+                                            
+                                                itemName = {product.productName} itemDescription ={product.description} 
+                                                <img src={product.imageAccessNumber}/>
+                                            </div> 
+
+                                        </div> 
+                                    </SwiperSlide>
+                                );
+
+                                
+
+                             })}
 
 
-            {filteredData.map(item => (
-                <div>
-                    <div className="bs-icons">
-                        <BsArrowLeft id='arrowLeft' onClick= {()=> {isFirst ? handlePageClickPrev(): handlePrev()}}/>
-                        <BsArrowRight id='arrowRight'  onClick= {()=> {isLast ? handlePageClickNext(): handleNext()}}/>            
+                        </Swiper>
+
                     </div>
-                <div>
-                <Swiper
-                slidesPerView={1}
-                spaceBetween={0}
-                className={'mySwiper'}
-                ref={SlideRef}
-                onSlideChange={onSlideChange}
-                pagination={{
-                    el: '.swiper-paginate-controls',
-                    type: 'fraction',
-                }}
-                navigation={false}
-                modules={[Pagination, Navigation]}
-                >
 
-                <div className={`card ${isFlipped ? 'flipped' : ''}`} onClick={handleClick}>
-                <div className="card-inner">
-                    <div className="card-front">
-
-                    <header className="w3-container w3-white">
-                        <h1 style={{fontSize: '6vw'}}>{item.productName}</h1>
-                    </header>
-                        <div style={{fontSize: '3vw'}}>
-                            <br></br>
-                            <div className="w3-container">
-                                <img
-                                className='itemImage'
-                                src = {testImage}                                
-                                />
-                            </div>
-                        </div>                       
-                </div>
-
-                <div className="card-back">
-                    <header className="w3-container w3-white">
-                        <h1 style={{fontSize: '6vw'}}>{item.description}</h1>
-                    </header>
-                        {/* <h3 className="w3-container w3-white">{props.description}</h3> */}
-                        <p>This is the back of the card.</p>
-                </div>
-                </div>
-                </div>
-                </Swiper>
-                </div>
-                </div>
-            ))}
-
-
-
-</MobileView>
+            </MobileView>
            
         </div>
     )
