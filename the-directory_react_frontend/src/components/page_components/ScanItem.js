@@ -103,7 +103,6 @@ export default function ScanItem(){
         const res = await fetch(
             requestURL
         );
-
         const data = await res.json();
         return (data.products);
     };
@@ -125,7 +124,6 @@ export default function ScanItem(){
         else
         {
         }
-               
     }
 
     const handlePageClickPrev = async (data) =>{
@@ -133,13 +131,10 @@ export default function ScanItem(){
         {        
             productPerPage.currentPage = productPerPage.currentPage - 1;
             const productsFormsServer = await fetchProducts(productPerPage.currentPage);
-            
             setProducts(productsFormsServer);
             SlideRef.current.swiper.slideTo(2,0,false)
-
             console.log("AFTER: MADE it back. Data page is: " + productPerPage.currentPage); //PASSED!!!  
         }
-
     }
 
 
@@ -172,10 +167,6 @@ export default function ScanItem(){
     return (
         <div>
             {/* Browser */}
-
-
-
-
             <BrowserView>
                 <div className="DesktopScanItem">
                     <div className="w3-card-4 w3-border DesktopScanItem">
@@ -242,7 +233,6 @@ export default function ScanItem(){
                                 className='itemImage'
                                 src = {testImage}                                
                                 />
-                                
                             </div>
                         </div>                       
                 </div>

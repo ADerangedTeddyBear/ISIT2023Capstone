@@ -8,7 +8,6 @@ import {
 } from "firebase/storage";
 import { storage } from "../firebase";
 
-
 export default function Home(){
     const [dictionary, setDictionary] = useState({});
     const [allProducts, setAllProducts] = useState([]);
