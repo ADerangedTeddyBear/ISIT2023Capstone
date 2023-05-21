@@ -50,7 +50,6 @@ export default function Home(){
                     {Object.entries(dictionary).map((dic) => {
                         if (dic[0] == product.id){
                             product.imageAccessNumber = dic[1]
-                            //console.log(dic[0], product.id, dic[1])
                         }
                     })}
                     return (

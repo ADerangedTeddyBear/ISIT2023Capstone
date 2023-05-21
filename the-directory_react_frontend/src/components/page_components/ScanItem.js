@@ -36,14 +36,12 @@ export default function ScanItem(){
         setIsFlipped(!isFlipped);
       };
 
-
     const {productId} = useParams();
     const [dictionary, setDictionary] = useState({});
     const [allProducts, setAllProducts] = useState([]);
     const imagesListRef = ref(storage, "images/");
     const [products, setProducts] = useState([]);
     const [data, setData] = useState([]);
-
 
     //Swiper payload
     const [productPerPage, setProductPerPAge] = useState([]);
@@ -167,7 +165,6 @@ export default function ScanItem(){
     };
     const { isLast, isFirst } = slideBegOrNot;
 
-
     return (
         <div>
             {/* Browser */}
@@ -218,28 +215,115 @@ export default function ScanItem(){
                                 product.imageAccessNumber = dic[1]
                             }
                         })}
-                    console.log(typeof(filteredData), typeof(filteredData))
-
                                 return (
                                     <SwiperSlide>
                                         <div className='row m-2'>
                                             <div key={product.id}>
-                                            
-                                                itemName = {product.productName} itemDescription ={product.description} 
-                                                <img src={product.imageAccessNumber}/>
-                                            </div> 
+                                                {filteredData[0].id === product.id ? (
+                                                    <div>
 
+
+
+
+
+
+                                                    <div className={`card ${isFlipped ? 'flipped' : ''}`} onClick={handleClick}>
+                                                                <div className="card-inner">
+                                                                    <div className="card-front">
+
+
+                                                                    <header className="w3-container w3-white">
+                                                                        <h1 style={{fontSize: '6vw'}}>{product.productName}</h1>
+                                                                    </header>
+                                                                        <div style={{fontSize: '3vw'}}>
+                                                                            <br></br>
+                                                                            <div className="w3-container">
+                                                                                <img
+                                                                                className='itemImage'
+                                                                                src = {product.imageAccessNumber}                                
+                                                                                />
+                                                                                
+                                                                            </div>
+                                                                        </div>                       
+                                                                    
+                                                                </div>
+
+                                                                <div className="card-back">
+                                                                    <header className="w3-container w3-white">
+                                                                        <h1 style={{fontSize: '6vw'}}>{product.productName}</h1>
+                                                                    </header>
+                                                                        {/* <h3 className="w3-container w3-white">{props.description}</h3> */}
+                                                                        <p>This is the back of the card.</p>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
+
+
+
+
+
+
+
+                                                    </div>
+                                                    ) : (
+                                                        <div>
+
+
+
+
+
+                                                            <div className={`card ${isFlipped ? 'flipped' : ''}`} onClick={handleClick}>
+                                                                <div className="card-inner">
+                                                                    <div className="card-front">
+
+
+                                                                    <header className="w3-container w3-white">
+                                                                        <h1 style={{fontSize: '6vw'}}>{product.productName}</h1>
+                                                                    </header>
+                                                                        <div style={{fontSize: '3vw'}}>
+                                                                            <br></br>
+                                                                            <div className="w3-container">
+                                                                                <img
+                                                                                className='itemImage'
+                                                                                src = {testImage}                                
+                                                                                />
+                                                                                
+                                                                            </div>
+                                                                        </div>                       
+                                                                    
+                                                                </div>
+
+                                                                <div className="card-back">
+                                                                    <header className="w3-container w3-white">
+                                                                        <h1 style={{fontSize: '6vw'}}>{product.productName}</h1>
+                                                                    </header>
+                                                                        {/* <h3 className="w3-container w3-white">{props.description}</h3> */}
+                                                                        <p>This is the back of the card.</p>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
+
+
+
+
+
+
+                                                        
+                                                      </div>
+
+                                                    )}         
+                                            </div> 
                                         </div> 
                                     </SwiperSlide>
                                 );
-
-                                
-
                              })}
-
-
                         </Swiper>
-
                     </div>
 
             </MobileView>

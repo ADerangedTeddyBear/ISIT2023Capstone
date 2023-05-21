@@ -202,7 +202,7 @@ export default function Scan(){
                                 <SwiperSlide>   
                                     <div className='row m-2'>
                                         <div key={product.id}>
-                                            <Link style={{pointerEvents: clickable ? '' : 'none'}} to={`/scan/${product.id}`}><ScanItem/></Link>
+                                            <Link style={{pointerEvents: clickable ? '' : 'none'}} to={`/scan/${product.id}`}></Link>
                                         </div>                                
                                     </div>                       
                                 </SwiperSlide>

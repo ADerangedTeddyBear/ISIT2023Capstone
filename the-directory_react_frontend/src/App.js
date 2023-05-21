@@ -10,7 +10,7 @@ import Home from './pages/Home';
 import Scan from './pages/Scan';
 import Scanner from './pages/Scanner';
 import ScanItem from "./components/page_components/ScanItem";
-
+import MyComponent from "./components/page_components/MyComponent"
 function App() {
   return (
     <>
