@@ -18,8 +18,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="scan" element={<Scan />} />
-          <Route path="scan/:productId" element={<ScanItem />} />
+          <Route path="scan/" element={<MyComponent />} />
+          <Route path="scan/:productId" element={<MyComponent />} />
           <Route path="scanner" element={<Scanner />} />
         </Route>
       </Routes>

@@ -170,9 +170,11 @@ export default function Scan(){
     };
     const { isLast, isFirst } = slideBegOrNot;
 
+
     //UPDATED RETURN CODE
     return (
         <div>
+
             <div className="bs-icons">
                 <BsArrowLeft id='arrowLeft' onClick= {()=> {isFirst ? handlePageClickPrev(): handlePrev()}}/>
                 <BsArrowRight id='arrowRight'  onClick= {()=> {isLast ? handlePageClickNext(): handleNext()}}/>            

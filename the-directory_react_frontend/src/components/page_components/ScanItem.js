@@ -17,7 +17,7 @@ import {
 import { storage } from "../../firebase";
 
 // URL Params
-import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { Routes, Route, Link, useParams } from 'react-router-dom';
 import axios from "axios";
 
 //Swiper Component imports
@@ -28,6 +28,9 @@ import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper';
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 import { useRef } from 'react';
+
+
+
 
 export default function ScanItem(){
     //Flip tracker
@@ -221,16 +224,9 @@ export default function ScanItem(){
                                             <div key={product.id}>
                                                 {filteredData[0].id === product.id ? (
                                                     <div>
-
-
-
-
-
-
                                                     <div className={`card ${isFlipped ? 'flipped' : ''}`} onClick={handleClick}>
                                                                 <div className="card-inner">
                                                                     <div className="card-front">
-
 
                                                                     <header className="w3-container w3-white">
                                                                         <h1 style={{fontSize: '6vw'}}>{product.productName}</h1>
@@ -245,7 +241,6 @@ export default function ScanItem(){
                                                                                 
                                                                             </div>
                                                                         </div>                       
-                                                                    
                                                                 </div>
 
                                                                 <div className="card-back">
@@ -259,11 +254,6 @@ export default function ScanItem(){
                                                             </div>
 
                                                         </div>
-
-
-
-
-
 
 
 
