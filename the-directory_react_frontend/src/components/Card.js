@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import '../assets/styles/Card.css';
+import  TestImage from '../assets/images/testPicture.jpg';
 import ScanItem from './page_components/ScanItem';
+import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'; 
+
 
 
 export default function Card(props){
@@ -11,20 +14,30 @@ export default function Card(props){
   };
 
   return (
-	<div className={`card ${isFlipped ? 'flipped' : ''}`} onClick={handleClick}>
-		<div className="card-inner">
-			<div className="card-front">
-				
-				
-			</div>
+	<div>
+		<MobileView>
+			<div className={`card ${isFlipped ? 'flipped' : ''}`} onClick={handleClick}>
+				<div className="card-inner">
+					<div className="card-front">
 
-			<div className="card-back">
-					<h3>Back Side</h3>
-					<p>This is the back of the card.</p>
-			</div>
+						<h2>{props.productName}</h2>
+						<img src={TestImage} width={200} height={200}/>
 
-		</div>
-  	
+						
+						
+					</div>
+
+					<div className="card-back">
+							<h3>Back Side</h3>
+							<p>{props.description}</p>
+							<p> ID is: {props.sequence}</p>
+
+					</div>
+
+				</div>
+			
+			</div>
+		</MobileView>
 	</div>
   );
 };

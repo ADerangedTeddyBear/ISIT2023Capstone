@@ -10,7 +10,9 @@ import Home from './pages/Home';
 import Scan from './pages/Scan';
 import Scanner from './pages/Scanner';
 import ScanItem from "./components/page_components/ScanItem";
-import MyComponent from "./components/page_components/MyComponent"
+import MyComponent from "./components/page_components/MyComponent";
+import ResultPage from "./components/page_components/ResultPage";
+
 function App() {
   return (
     <>
@@ -19,7 +21,9 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="scan/" element={<MyComponent />} />
+
           <Route path="scan/:productId" element={<MyComponent />} />
+
           <Route path="scanner" element={<Scanner />} />
         </Route>
       </Routes>

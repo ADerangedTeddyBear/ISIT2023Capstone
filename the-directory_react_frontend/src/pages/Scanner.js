@@ -1,53 +1,160 @@
+//VERSION TWO
+
 import React from 'react';
-import '../assets/styles/Scanner.css';
-//import '../assets/styles/Scanner_style.css';
-//import QrReader from 'react-qr-scanner';
-import QrReader from 'react-qr-reader';
+import QrScanner from 'react-qr-scanner';
+// import '../assets/styles/Scanner.css';
+// import '../assets/styles/Scanner_style.css';
 import { useState, useRef } from 'react';
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'; 
 
-export default function Scanner(){    
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { useNavigate } from 'react-router-dom';
+
+const QRScanner = () => {
+    const navigate = useNavigate();
 
     const qrRef = useRef(null);
     const [webcamResult, setWebCamResult] = useState();
 
-    const webcamError = (error) => {
-        if (error) {
-            console.log(error);
-        }
-    };
+  const handleScan = (data) => {
+    if (data) {
+      setWebCamResult(data.text);
+      const productId = data.text;
+    //console.log("The productID is: " + productId);
+      navigate(`/scan?id=${productId}`); //?sequences=${productId}'
+    }
+  };
 
-    const webcamScan = (result) => {
-        if (result){
-            setWebCamResult(result);
-        }
+  const handleError = (error) => {
+    console.error(error);
+  };
 
-    };
-    return (
-        <div>
-            <h1 className='pageTitle'>Scanner</h1>
 
-            <MobileView>
+//   const webcamError = (error) => {
+//         if (error) {
+//             console.log("There was an error");
+//         }
+//     };
+
+//     const webcamScan = (result) => {
+//         if (result){
+//             setWebCamResult(result.text);
+//             console.log(webcamResult);
+//         }
+
+//     };
+
+  return (
+    <div>
+          <MobileView>
                 <div className='scanner'>
-                    <QrReader                
+                <QrScanner
+                
+                    delay={300}
+                    onError={handleError}
+                    onScan={handleScan}
+                    // facingMode={'user'}
+                    // legacyMode={true}
+                />
+                    {/* <QrReader                
                         delay={300} 
                         onError={webcamError}
                         onScan={webcamScan}
                         facingMode={'user'}
-                        //legacyMode={true}
-                    />
-
+                        legacyMode={true}
+                    /> */}
+                    <p>The result is: {webcamResult}</p>
                     <h5>Result display in list of cards with pagination based on desired design.</h5>
 
                 </div>
             </MobileView>
+      {/* <QrScanner
+        onScan={webcamScan}
+        onError={webcamError}
+        style={{ width: '100%' }}
+      />
+      <p>{webcamResult}</p> */}
+    </div>
+  );
+};
 
-            <BrowserView>
-                <div>This application function is not compatible with non-mobile devices. Please return to the home page</div>
-            </BrowserView>
+export default QRScanner;
+
+
+
+//VERSION ONE
+// import React from 'react';
+// import '../assets/styles/Scanner.css';
+// //import '../assets/styles/Scanner_style.css';
+// import QrReader from 'react-qr-scanner'
+// // import QrReader from 'react-qr-reader';
+// import { useState, useRef } from 'react';
+// import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'; 
+
+// export default function Scanner(){    
+
+//     const qrRef = useRef(null);
+//     const [webcamResult, setWebCamResult] = useState();
+
+    
+
+    // const webcamError = (error) => {
+    //     if (error) {
+    //         console.log("There was an error");
+    //     }
+    // };
+
+    // const webcamScan = (result) => {
+    //     if (result){
+    //         setWebCamResult(result);
+    //         console.log(webcamResult);
+    //     }
+
+    // };
+
+    // const onScaFile = () =>{
+    //     qrRef.current.openImageDialog();
+    // }
+
+
+
+
+//     return (
+//         <div>
+//             <h1 className='pageTitle'>Scanner</h1>
+
+//             <MobileView>
+//                 <div className='scanner'>
+//                 <QrReader
+//                 delay={this.state.delay}
+//                 style={previewStyle}
+//                 onError={this.handleError}
+//                 onScan={this.handleScan}
+//                     // delay={300}
+//                     // onError={webcamError}
+//                     // onScan={webcamScan}
+//                     // facingMode={'user'}
+//                     // legacyMode={true}
+//                 />
+//                     {/* <QrReader                
+//                         delay={300} 
+//                         onError={webcamError}
+//                         onScan={webcamScan}
+//                         facingMode={'user'}
+//                         legacyMode={true}
+//                     /> */}
+//                     <p>The result is: {this.state.result}</p>
+//                     <h5>Result display in list of cards with pagination based on desired design.</h5>
+
+//                 </div>
+//             </MobileView>
+
+//             <BrowserView>
+//                 <div>This application function is not compatible with non-mobile devices. Please return to the home page</div>
+//             </BrowserView>
 
 
             
-        </div>
-    )
-}
+//         </div>
+//     )
+// }
