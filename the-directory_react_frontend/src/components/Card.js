@@ -1,45 +1,32 @@
 import React, { useState } from 'react';
 import '../assets/styles/Card.css';
-import  TestImage from '../assets/images/testPicture.jpg';
-import ScanItem from './page_components/ScanItem';
-import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'; 
+import TestImage from '../assets/images/testPicture.jpg';
 
-
-
-export default function Card(props){
+const Card = ({ product }) => {
+  const { productName, imageAccessNumber, description, sequence } = product;
   const [isFlipped, setIsFlipped] = useState(false);
 
-  const handleClick = () => {
-	setIsFlipped(!isFlipped);
+  const flipCard = () => {
+    setIsFlipped(!isFlipped);
   };
 
   return (
-	<div>
-		<MobileView>
-			<div className={`card ${isFlipped ? 'flipped' : ''}`} onClick={handleClick}>
-				<div className="card-inner">
-					<div className="card-front">
+    <div className={`card ${isFlipped ? 'flipped' : ''}`} onClick={flipCard}>
+      {console.log(product)}
 
-						<h2>{props.productName}</h2>
-						<img src={TestImage} width={200} height={200}/>
-
-						
-						
-					</div>
-
-					<div className="card-back">
-							<h3>Back Side</h3>
-							<p>{props.description}</p>
-							<p> ID is: {props.sequence}</p>
-
-					</div>
-
-				</div>
-			
-			</div>
-		</MobileView>
-	</div>
+      <div className="card-front">
+        <h2>{productName}</h2>
+        <img
+          src={product.imageAccessNumber}
+          alt="Product Image"
+          className="image-resize" // Apply CSS class for image resizing
+        />
+      </div>
+      <div className="card-back">
+        <p>{description}</p>
+      </div>
+    </div>
   );
 };
 
-//export default Card;
+export default Card;

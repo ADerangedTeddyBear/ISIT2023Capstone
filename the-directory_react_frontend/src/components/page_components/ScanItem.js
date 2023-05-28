@@ -57,27 +57,32 @@ export default function ScanItem(){
         .catch(error => console.log(error));
 
         const getAllProducts = async () => {
-            const res = await fetch(
-                'https://localhost:7294/api/Product'
-            );
+            const res = await fetch('https://localhost:7294/api/Product');
             const data = await res.json();
-            setAllProducts(data.allProducts);
-
-            listAll(imagesListRef).then((response) => {
-                response.items.forEach((item) => {
-                    getDownloadURL(item).then((url => {
-                            data.forEach((product)=>{
-                                if (product.imageAccessNumber == item.name){
-                                        setDictionary(prevDictionary => ({
-                                            ...prevDictionary,
-                                            [product.id]: url
-                                    }));
-                                }
-                            })
-                    }));
-                    });
+            setData(data.allProducts);
+        
+            listAll(imagesListRef).then(response => {
+              const downloadPromises = response.items.map(item => {
+                return getDownloadURL(item).then(url => {
+                  return { name: item.name, url };
                 });
-        }
+              });
+        
+              Promise.all(downloadPromises).then(downloads => {
+                const imageDictionary = {};
+        
+                data.forEach(product => {
+                  downloads.forEach(download => {
+                    if (product.imageAccessNumber === download.name) {
+                      imageDictionary[product.id] = download.url;
+                    }
+                  });
+                });
+        
+                setDictionary(imageDictionary);
+              });
+            });
+          };
 
         const getProducts = async () => {
             const res = await fetch(
