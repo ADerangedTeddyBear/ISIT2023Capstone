@@ -3,6 +3,7 @@ import '../../assets/styles/Nav.css';
 import '../../assets/styles/W3.css';
 import qrImg from "../../assets/images/qr-code.png"
 import homeImg from "../../assets/images/home-del.png"
+import scanImg from "../../assets/images/scan.png"
 import styles from "../../assets/styles/MobileNav.module.css";
 
 import { NavLink, Link, useLocation } from 'react-router-dom';
@@ -33,7 +34,7 @@ export default function Nav(){
                 <NavLink to={"/scan"}
                 style={({ isActive }) => ({
                   filter: isActive ? 'var(--mobile-nav-image-active-color)' : 'none',
-                })}><img src={qrImg} className={styles['navIcons']}></img></NavLink>
+                })}><img src={scanImg} className={styles['navIcons']}></img></NavLink>
 
                 <NavLink to={"/scanner"}
                     style={({ isActive }) => ({

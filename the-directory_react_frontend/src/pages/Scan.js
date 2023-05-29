@@ -1,7 +1,9 @@
+import React from 'react';
+
 import ReactPaginate from 'react-paginate';
 import ScanItem from '../components/page_components/ScanItem';
 import { useEffect, useState } from 'react';
-import '../assets/styles/Styles.css';
+import styles from '../assets/styles/Styles.css';
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'; 
 
 //New Card implement 
@@ -11,8 +13,8 @@ import MobileCard from '../components/page_components/MobileCard';
 //Swiper Component imports
 //import Slider from '../components/page_components/Slider';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
+// import 'swiper/css';
+// import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper';
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 import { useRef } from 'react';
@@ -172,7 +174,9 @@ export default function Scan(){
 
     //UPDATED RETURN CODE
     return (
+      <div className={styles['cardContainer']}>
         <MobileCard />
+      </div>
 
         // <div>
         //     <div className="bs-icons">
