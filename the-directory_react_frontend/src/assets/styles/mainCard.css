@@ -53,6 +53,7 @@
   border-radius: var(--mobile-card-border-radius);
   box-shadow: 4px 4px 4px rgb(53, 53, 53);
   color: white;
+  background-color: rgb(55, 58, 58);
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;

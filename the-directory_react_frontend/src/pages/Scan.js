@@ -172,7 +172,8 @@ export default function Scan(){
 
     //UPDATED RETURN CODE
     return (
-        <MobileCard></MobileCard>
+        <MobileCard />
+
         // <div>
         //     <div className="bs-icons">
         //         <BsArrowLeft id='arrowLeft' onClick= {()=> {isFirst ? handlePageClickPrev(): handlePrev()}}/>
