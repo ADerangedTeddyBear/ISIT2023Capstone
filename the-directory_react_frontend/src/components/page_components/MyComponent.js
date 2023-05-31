@@ -9,16 +9,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import 'swiper/swiper-bundle.css';
 
-
-
 import {
   ref,
   getDownloadURL,
   listAll,
 } from "firebase/storage";
 import { storage } from "../../firebase";
-
-
 
 SwiperCore.use([Navigation, Pagination]);
 
@@ -39,12 +35,12 @@ const MyComponent = () => {
 
   useEffect(() => {
     axios
-      .get('https://localhost:7294/api/Product')
+      .get('https://mongodbbackend.azurewebsites.net//api/Product')
       .then(response => setData(response.data))
       .catch(error => console.log(error));
   
     const getAllProducts = async () => {
-      const res = await fetch('https://localhost:7294/api/Product');
+      const res = await fetch('https://mongodbbackend.azurewebsites.net//api/Product');
       const data = await res.json();
   
       listAll(imagesListRef)
