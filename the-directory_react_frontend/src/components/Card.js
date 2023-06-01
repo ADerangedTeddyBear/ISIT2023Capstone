@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../assets/styles/Card.css';
 import TestImage from '../assets/images/testPicture.jpg';
-
+import '../../src/assets/styles/W3.css'
 const Card = ({ product }) => {
   const { productName, imageAccessNumber, description, sequence } = product;
   const [isFlipped, setIsFlipped] = useState(false);
@@ -34,7 +34,8 @@ const Card = ({ product }) => {
 <div className={`card ${isFlipped ? "flip" : ""}`}>
 
   <div className="front" onClick={flipCard}>
-    <h1>{productName}</h1>
+    <h2 className='cardHeaderBorder'>{productName}</h2>
+    <div className='cardContentBorder'>
     <img
           src={product.imageAccessNumber}
           alt="Product Image"
@@ -42,9 +43,11 @@ const Card = ({ product }) => {
         />
     </div>
 
+    </div>
+
   <div className="back" onClick={flipCard}>
-  <h1>{productName}</h1>
-    <div className="backInfo">
+  <h2 className='cardHeaderBorder'>{productName}</h2>
+    <div className="backInfo, cardContentBorder">
       <div className="backTextWrapper">
       <p>{description}</p>
       </div>
