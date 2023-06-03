@@ -12,22 +12,6 @@ const Card = ({ product }) => {
 
   return (
     <>
-        {/* <div className={`card ${isFlipped ? 'flipped' : ''}`} onClick={flipCard}>
-      {console.log(product)}
-
-      <div className="card-front">
-        <h2>{productName}</h2>
-        <img
-          src={product.imageAccessNumber}
-          alt="Product Image"
-          className="image-resize" // Apply CSS class for image resizing
-        />
-      </div>
-      <div className="card-back">
-        <p>{description}</p>
-      </div>
-    </div> */}
-
 {/* My version below */}
     <div className="card-grid">
 
@@ -35,13 +19,12 @@ const Card = ({ product }) => {
 
   <div className="front" onClick={flipCard}>
     <h2 className='cardHeaderBorder'>{productName}</h2>
-    <div className='cardContentBorder'>
     <img
-          src={product.imageAccessNumber}
-          alt="Product Image"
-          className="image-resize" // Apply CSS class for image resizing
-        />
-    </div>
+      src={product.imageAccessNumber}
+      alt="Product Image"
+      className="image-resize" // Apply CSS class for image resizing
+    />
+
 
     </div>
 
