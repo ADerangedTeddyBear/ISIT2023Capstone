@@ -110,18 +110,17 @@ const MyComponent = () => {
 
   return (
     <div>
-      <h1>Title</h1>
-
       {data.length > 0 ? (
         <Swiper ref={swiperRef} onSlideChange={handleSwipe} initialSlide={activeIndex} navigation pagination>
           {data.map((product) => (
             <SwiperSlide key={product.sequences}>
               <Link to={`/scan/${product.sequences}`} />
-              <div className="card">
+              {/* <div className="card">
+
+              </div> */}
               <Card
                 product={product}
               />
-              </div>
             </SwiperSlide>
           ))}
         </Swiper>

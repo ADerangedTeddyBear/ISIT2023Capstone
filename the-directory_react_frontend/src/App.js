@@ -12,7 +12,6 @@ import Scanner from './pages/Scanner';
 import ScanItem from "./components/page_components/ScanItem";
 import MyComponent from "./components/page_components/MyComponent";
 import ResultPage from "./components/page_components/ResultPage";
-import TestScan from "./pages/TestScan";
 
 function App() {
   return (
@@ -26,7 +25,6 @@ function App() {
           <Route path="scan/:productId" element={<MyComponent />} />
 
           <Route path="scanner" element={<Scanner />} />
-          <Route path="testscan" element={<TestScan />} />
 
         </Route>
       </Routes>
