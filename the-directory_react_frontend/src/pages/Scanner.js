@@ -46,10 +46,14 @@ const QRScanner = () => {
 
   return (
     <div>
+      <BrowserView>
+        <div>This application function is not compatible with non-mobile devices. Please return to the home page</div>
+      </BrowserView>
           <MobileView>
                 <div className='scanner'>
                 <QrScanner
-                
+                        style={{ width: '100%' }}
+
                     delay={300}
                     onError={handleError}
                     onScan={handleScan}
