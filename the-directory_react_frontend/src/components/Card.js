@@ -29,7 +29,6 @@ const Card = ({ product }) => {
     <div className="backInfo, cardContentBorder">
       <div className="backTextWrapper">
       <p>{product.description}</p>
-
       {product.color !== "" && (
       <p>Color:{product.color}</p>
       )}
