@@ -39,12 +39,12 @@ const MyComponent = () => {
 
   useEffect(() => {
     axios
-      .get('https://localhost:7294/api/Product')
+      .get('https://localhost:44397/api/Product')
       .then(response => setData(response.data))
       .catch(error => console.log(error));
   
     const getAllProducts = async () => {
-      const res = await fetch('https://localhost:7294/api/Product');
+      const res = await fetch('https://localhost:44397/api/Product');
       const data = await res.json();
   
       listAll(imagesListRef)
