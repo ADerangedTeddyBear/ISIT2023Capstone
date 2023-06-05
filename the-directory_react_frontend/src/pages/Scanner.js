@@ -52,7 +52,7 @@ const QRScanner = () => {
           <MobileView>
                 <div className='scanner'>
                 <QrScanner
-                        style={{ width: '100%' }}
+                        style={{ width: '90%', border: '5px solid white', borderRadius: '5px', margin: 'auto', display: 'block' }}
 
                     delay={300}
                     onError={handleError}

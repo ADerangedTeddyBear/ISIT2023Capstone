@@ -6,6 +6,7 @@
   justify-content: center;
   overflow-x: scroll; /* Add horizontal scroll */
   padding: 10px; /* Add padding for spacing */
+  margin-top: 2vh;
 }
 
 .card {
