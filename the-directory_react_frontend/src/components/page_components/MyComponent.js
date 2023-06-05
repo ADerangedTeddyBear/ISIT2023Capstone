@@ -9,16 +9,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import 'swiper/swiper-bundle.css';
 
-
-
 import {
   ref,
   getDownloadURL,
   listAll,
 } from "firebase/storage";
 import { storage } from "../../firebase";
-
-
 
 SwiperCore.use([Navigation, Pagination]);
 

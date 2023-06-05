@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { ref, getDownloadURL, listAll } from "firebase/storage";
 import { storage } from "../firebase";
+import '../assets/styles/List.css';
 
 export default function Home() {
   const [dictionary, setDictionary] = useState({});
@@ -45,20 +46,25 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div className="list-container">
       {allProducts.map(product => {
         console.log(product)
         const imageUrl = dictionary[product.id];
         return (
-          <div key={product.id}>
+          <div key={product.id} className="list-item" >  
             <a href={'http://localhost:3000/scan/' + product.sequences}>
-              <h1>{product.productName}</h1>
-              <img
-                className='itemImage'
-                src={imageUrl}
-                alt={product.productName}
-                style={{ width: '200px', height: '200px' }}
-              />
+
+              <div className='image-container'>
+                <img  className='item-image'
+                  src={imageUrl}
+                  alt={product.productName}                
+                  // style={{ width: '100px', height: '100px' }}
+                />
+              </div>
+              <div className='.item-text'>
+                {product.productName}
+              </div>
+
             </a>
           </div>
         );
