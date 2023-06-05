@@ -10,12 +10,12 @@ export default function Home() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get('https://localhost:44397/api/Product')
+    axios.get('https://mongodbbackend.azurewebsites.net/api/product')
       .then(response => setData(response.data))
       .catch(error => console.log(error));
 
     const getAllProducts = async () => {
-      const res = await fetch('https://localhost:44397/api/Product');
+      const res = await fetch('https://mongodbbackend.azurewebsites.net/api/product');
       const data = await res.json();
       setAllProducts(data);
 
