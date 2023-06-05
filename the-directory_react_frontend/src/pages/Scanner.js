@@ -16,14 +16,14 @@ const QRScanner = () => {
     const qrRef = useRef(null);
     const [webcamResult, setWebCamResult] = useState();
 
-  const handleScan = (data) => {
-    if (data) {
-      setWebCamResult(data.text);
-      const productId = data.text;
-    //console.log("The productID is: " + productId);
-      navigate(`/scan?id=${productId}`); //?sequences=${productId}'
-    }
-  };
+    const handleScan = (data) => {
+      if (data) {
+        setWebCamResult(data.text);
+        const url = new URL(data.text);
+        const productId = url.pathname.split('/').pop();
+        navigate(`/scan?id=${productId}`);
+      }
+    };
 
   const handleError = (error) => {
     console.error(error);
