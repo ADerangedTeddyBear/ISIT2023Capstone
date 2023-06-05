@@ -1,3 +1,0 @@
-# ISIT2023Capstone
-
-# Testing first push...
