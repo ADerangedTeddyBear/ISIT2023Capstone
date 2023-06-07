@@ -2,16 +2,19 @@
     display: grid;
     grid-template-columns: 1fr; 
     gap: 10px;
-    padding: 10px;  
+    padding: 10px; 
+    
   }
   
-.list-item {
-    display: grid;
+  .list-item {
+    /* display: grid; */
     grid-template-columns: auto 1fr;
     gap: 10px;
     align-items: center;
     border: 1px solid #ccc;
     padding: 10px;
+    display: table; 
+    /* clear: both; */
   }
   
   .item-image {
