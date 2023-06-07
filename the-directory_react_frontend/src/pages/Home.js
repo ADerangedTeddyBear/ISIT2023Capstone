@@ -52,8 +52,7 @@ export default function Home() {
         const imageUrl = dictionary[product.id];
         return (
           <div key={product.id} className="list-item" >  
-            <a href={'http://localhost:3000/scan/' + product.sequences}>
-
+            <a href={`${window.location.origin}/scan/${product.sequences}`}>
               <div className='image-container'>
                 <img  className='item-image'
                   src={imageUrl}
