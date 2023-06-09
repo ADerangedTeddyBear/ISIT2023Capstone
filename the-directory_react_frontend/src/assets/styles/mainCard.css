@@ -4,7 +4,7 @@
 .card-grid {
   display: flex;
   justify-content: center;
-  overflow-x: scroll; /* Add horizontal scroll */
+  overflow-x: auto; /* Add horizontal scroll */
   padding: 10px; /* Add padding for spacing */
   margin-top: 2vh;
 }
@@ -22,6 +22,22 @@
   height: 70vh;
   margin-top: 2vh;
   width: calc(100% - 20px); /* Adjust the width to fit the available space with padding */
+  margin: 0 5px; /* Add margin on either side */
+}
+
+.card-Desktop {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: 700ms;
+  transform: perspective(1000px) rotateY(var(--rotate-y, 0))
+    translateY(var(--translate-y, 0));
+  height: 70vh;
+  margin-top: 2vh;
+  width: calc(10  0% - 20px); /* Adjust the width to fit the available space with padding */
   margin: 0 5px; /* Add margin on either side */
 }
 
@@ -140,6 +156,13 @@
 .backInfo {
   margin: 12px;
   font-size: 18px;
+  font-family: 'Franklin Gothic Narrow';
+  letter-spacing: 1px;
+}
+
+.backInfoDesktop {
+  margin: 12px;
+  font-size: 2vw;
   font-family: 'Franklin Gothic Narrow';
   letter-spacing: 1px;
 }

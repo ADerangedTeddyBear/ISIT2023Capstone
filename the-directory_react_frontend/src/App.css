@@ -83,6 +83,11 @@ body{
   font-size: 10vw;
 }
 
+.Desktop-Title-Label{
+  text-align: center;
+  font-size: 6vw;
+}
+
 .PageTitleMobile {
   position: sticky;
   top: 0px;
