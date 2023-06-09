@@ -19,6 +19,8 @@ export default function Nav(){
             <BrowserView>
                 <Link className = 'link_item' to="/">Home</Link>
                 <Link  className = 'link_item' to="/scan">Scan</Link>
+                <Link  className = 'link_item' to="/desktopdisclaimer">Desktop Instructions</Link>
+
             </BrowserView>
 
             {/* Mobile */}

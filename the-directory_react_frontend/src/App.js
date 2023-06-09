@@ -12,7 +12,7 @@ import Scanner from './pages/Scanner';
 import ScanItem from "./components/page_components/ScanItem";
 import MyComponent from "./components/page_components/MyComponent";
 import ResultPage from "./components/page_components/ResultPage";
-
+import DesktopDisclaimer from "./components/page_components/DesktopDisclaimer";
 function App() {
   return (
     <>
@@ -21,6 +21,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="scan/" element={<MyComponent />} />
+          <Route path="desktopdisclaimer/" element={<DesktopDisclaimer />} />
 
           <Route path="scan/:productId" element={<MyComponent />} />
 
