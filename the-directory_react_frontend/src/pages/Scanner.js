@@ -40,7 +40,9 @@ const QRScanner = () => {
             delay={300}
             onError={handleError}
             onScan={handleScan}
-            videoConstraints={videoConstraints} // Specify the video constraints
+            constraints={{facingMode: 'environment'}} //New Constraint to Fix Camera
+       
+            //videoConstraints={videoConstraints} // Specify the video constraints
           />
           <p>The result is: {webcamResult}</p>
           <h5>Result display in list of cards with pagination based on desired design.</h5>
