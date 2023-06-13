@@ -49,6 +49,7 @@ const QRScanner = () => {
             //constraints={{facingMode: 'environment'}}//
             videoConstraints={videoConstraints} // Specify the video constraints
           />
+          <h5>Scan the QR code here for the Item you want to look up.</h5>
         </div>
       </MobileView>
     </div>
