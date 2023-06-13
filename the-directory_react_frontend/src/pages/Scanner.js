@@ -50,6 +50,7 @@ const QRScanner = () => {
             videoConstraints={videoConstraints} // Specify the video constraints
           />
           <h5>Scan the QR code here for the Item you want to look up.</h5>
+          <p>Camera access needs to be Allowed for mobile view.</p>
         </div>
       </MobileView>
     </div>
