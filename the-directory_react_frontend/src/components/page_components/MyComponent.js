@@ -32,6 +32,7 @@ const MyComponent = () => {
   const [dictionary, setDictionary] = useState({});
   const imagesListRef = ref(storage, "images/");
 
+  document.title = "Card List"
 
   useEffect(() => {
     axios

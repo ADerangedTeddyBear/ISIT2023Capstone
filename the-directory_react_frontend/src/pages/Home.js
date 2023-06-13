@@ -10,6 +10,8 @@ export default function Home() {
   const imagesListRef = ref(storage, "images/");
   const [data, setData] = useState([]);
 
+  document.title = "Home"
+
   useEffect(() => {
     axios.get('https://mongodbbackend.azurewebsites.net/api/product')
       .then(response => setData(response.data))

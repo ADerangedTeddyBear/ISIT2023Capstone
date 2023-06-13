@@ -6,6 +6,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { useNavigate } from 'react-router-dom';
 
 const QRScanner = () => {
+  document.title = "Scanner"
+
   const navigate = useNavigate();
 
   const qrRef = useRef(null);

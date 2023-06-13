@@ -1,6 +1,8 @@
 import React from 'react';
 
 export default function DesktopDisclaimer() {
+  document.title = "Desktop Disclaimer"
+
     return (
         <>
         <br/>
