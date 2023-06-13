@@ -13,15 +13,18 @@ export default function Home() {
   document.title = "Home"
 
   useEffect(() => {
+    //Retrieves data from mongo database
     axios.get('https://mongodbbackend.azurewebsites.net/api/product')
       .then(response => setData(response.data))
       .catch(error => console.log(error));
 
+    //Retrieves data from mongo database
     const getAllProducts = async () => {
       const res = await fetch('https://mongodbbackend.azurewebsites.net/api/product');
       const data = await res.json();
       setAllProducts(data);
 
+      //Retrieves images from Firebase
       listAll(imagesListRef).then(response => {
         const downloadPromises = response.items.map(item => {
           return getDownloadURL(item).then(url => {
@@ -48,6 +51,7 @@ export default function Home() {
   }, []);
 
   return (
+    //Displays list of all items in the database
     <div className="list-container">
       {allProducts.map(product => {
         console.log(product)
@@ -56,11 +60,13 @@ export default function Home() {
           <div key={product.id} className="list-item" >  
             <a href={`${window.location.origin}/scan/${product.sequences}`}>
               <div className='image-container'>
+                
+                {/* Image from Firebase */}
                 <img  className='item-image'
                   src={imageUrl}
                   alt={product.productName}                
-                  // style={{ width: '100px', height: '100px' }}
                 />
+
               </div>
               <div className='.item-text'>
                 {product.productName}

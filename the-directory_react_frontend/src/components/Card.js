@@ -5,12 +5,15 @@ import '../../src/assets/styles/W3.css'
 import { BrowserView, MobileView } from 'react-device-detect';
 const Card = ({ product }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+
+  //Handles card flipping
   const flipCard = () => {
     setIsFlipped(!isFlipped);
   };
 
   return (
     <>
+    {/* Desktop rendering for Card */}
     <BrowserView>
       <div className="card-grid card-Desktop">
 
@@ -48,6 +51,7 @@ const Card = ({ product }) => {
       </div>
     </BrowserView>
 
+    {/* Mobile rendering for Card */}
     <MobileView>
       <div className="card-grid">
 

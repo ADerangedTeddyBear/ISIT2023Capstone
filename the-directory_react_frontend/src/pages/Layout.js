@@ -10,23 +10,17 @@ import Popup from "reactjs-popup";
 const Layout = () => {
   return (
     <>
-    <BrowserView>
-      <h1 className="Desktop-Title-Label">The Directory</h1>
-      {/* <img src={logo} className="App-logo-alt" alt="logo" /> */}
-      <Nav />
-      <Outlet />
-    </BrowserView>
+      <BrowserView>
+        <h1 className="Desktop-Title-Label">The Directory</h1>
+        <Nav />
+        <Outlet />
+      </BrowserView>
 
-    <MobileView>
-      <h1 className="Title-label PageTitleMobile">The Directory</h1>
-      {/* <img src={logo} className="App-logo-alt" alt="logo" /> */}
-      <Nav />
-      <Outlet />
-
-    </MobileView>
-
-
-
+      <MobileView>
+        <h1 className="Title-label PageTitleMobile">The Directory</h1>
+        <Nav />
+        <Outlet />
+      </MobileView>
     </>
   )
 };

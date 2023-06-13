@@ -27,14 +27,13 @@ const MyComponent = () => {
   const scannedIndex = urlParams.get('id');
   const [activeIndex, setActiveIndex] = useState(0);
   const navigate = useNavigate();
-
-
   const [dictionary, setDictionary] = useState({});
   const imagesListRef = ref(storage, "images/");
 
   document.title = "Card List"
 
   useEffect(() => {
+    //Retrieves data from Mongo database
     axios
       .get('https://mongodbbackend.azurewebsites.net/api/product')
       .then(response => setData(response.data))
@@ -44,6 +43,7 @@ const MyComponent = () => {
       const res = await fetch('https://mongodbbackend.azurewebsites.net/api/product');
       const data = await res.json();
   
+      //Retrieves images from Firebae
       listAll(imagesListRef)
         .then(response => {
           const downloadPromises = response.items.map(item => {
@@ -52,6 +52,7 @@ const MyComponent = () => {
             });
           });
   
+          //Combines Firebase and Mongo results
           Promise.all(downloadPromises)
             .then(downloads => {
               const updatedData = data.map(product => {
@@ -76,6 +77,7 @@ const MyComponent = () => {
     getAllProducts();
   }, []);
 
+  //Scan result functionality
   useEffect(() => {
     if (data.length > 0) {
       let selectedProduct;
@@ -93,6 +95,7 @@ const MyComponent = () => {
     }
   }, [data, productId, scannedIndex, navigate]);
 
+  //Navigation between cards
   const handleSwipe = (swiper) => {
     const slideIndex = swiper.realIndex;
     setActiveIndex(slideIndex);
@@ -107,6 +110,7 @@ const MyComponent = () => {
 
   return (
     <div>
+      {/* Renders cards */}
       {data.length > 0 ? (
         <Swiper ref={swiperRef} onSlideChange={handleSwipe} initialSlide={activeIndex} navigation pagination>
           {data.map((product) => (
@@ -122,6 +126,7 @@ const MyComponent = () => {
           ))}
         </Swiper>
       ) : (
+        // Items still being retrieved from Mongo database and Firebase
         <p>Loading...</p>
       )}
     </div>

@@ -13,6 +13,7 @@ const QRScanner = () => {
   const qrRef = useRef(null);
   const [webcamResult, setWebCamResult] = useState();
 
+  //Handles QR codes that have been scanned by the camera
   const handleScan = (data) => {
     if (data) {
       setWebCamResult(data.text);
@@ -32,9 +33,12 @@ const QRScanner = () => {
 
   return (
     <div>
+      {/* Failsafe for in case the user somehow accesses Scanner from an unsupported device */}
       <BrowserView>
         <div>This application function is not compatible with non-mobile devices. Please return to the home page</div>
       </BrowserView>
+
+      {/* Mobile view for camera */}
       <MobileView>
         <div className='scanner'>
           <QrScanner
@@ -45,8 +49,6 @@ const QRScanner = () => {
             //constraints={{facingMode: 'environment'}}//
             videoConstraints={videoConstraints} // Specify the video constraints
           />
-          <p>The result is: {webcamResult}</p>
-          <h5>Result display in list of cards with pagination based on desired design.</h5>
         </div>
       </MobileView>
     </div>

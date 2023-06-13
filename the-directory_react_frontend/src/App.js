@@ -16,20 +16,18 @@ import DesktopDisclaimer from "./components/page_components/DesktopDisclaimer";
 function App() {
   return (
     <>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="scan/" element={<MyComponent />} />
-          <Route path="desktopdisclaimer/" element={<DesktopDisclaimer />} />
-
-          <Route path="scan/:productId" element={<MyComponent />} />
-
-          <Route path="scanner" element={<Scanner />} />
-
-        </Route>
-      </Routes>
-    </BrowserRouter>
+      {/* Navigation routes for the application */}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="scan/" element={<MyComponent />} />
+            <Route path="desktopdisclaimer/" element={<DesktopDisclaimer />} />
+            <Route path="scan/:productId" element={<MyComponent />} />
+            <Route path="scanner" element={<Scanner />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
