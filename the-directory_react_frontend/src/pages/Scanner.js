@@ -45,8 +45,8 @@ const QRScanner = () => {
             //constraints={{facingMode: 'environment'}}//
             videoConstraints={videoConstraints} // Specify the video constraints
           />
-          <p>The result is: {webcamResult}</p>
-          <h5>Result display in list of cards with pagination based on desired design.</h5>
+          {/* <p>The result is: {webcamResult}</p> Used for debugging */}
+          <h5>Scan the QR code here for the Item you want to look up.</h5>
         </div>
       </MobileView>
     </div>
